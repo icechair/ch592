@@ -43,7 +43,7 @@ const uint32_t hex_num = 1;
 #define IAP_SAFE_FLAG_BLE        0x30de5821
 #define IAP_SAFE_FLAG_MASK       0x30de5820
 
-/* ÓÃÓÚAPPÅĞ¶ÏÎÄ¼şÓĞĞ§ĞÔ */
+/* ç”¨äºAPPåˆ¤æ–­æ–‡ä»¶æœ‰æ•ˆæ€§ */
 __attribute__((aligned(4))) uint32_t save_Flag __attribute__((section(".ImageFlag"))) = IAP_SAFE_FLAG_2_4G;
 
 /*********************************************************************
@@ -60,26 +60,26 @@ __attribute__((aligned(4))) uint32_t save_Flag __attribute__((section(".ImageFla
 uint8_t ota_taskID;
 
 // OTA IAP VARIABLES
-/* OTAÍ¨Ñ¶µÄÖ¡ */
+/* OTAé€šè®¯çš„å¸§ */
 OTA_IAP_CMD_t iap_rec_data;
 
-/* OTA½âÎö½á¹û */
+/* OTAè§£æç»“æœ */
 uint32_t OpParaDataLen = 0;
 uint32_t OpAdd = 0;
 
-/* flashµÄÊı¾İÁÙÊ±´æ´¢ */
+/* flashçš„æ•°æ®ä¸´æ—¶å­˜å‚¨ */
 __attribute__((aligned(8))) uint8_t block_buf[16];
 
-/* ImageÌø×ªº¯ÊıµØÖ·¶¨Òå */
+/* Imageè·³è½¬å‡½æ•°åœ°å€å®šä¹‰ */
 typedef int (*pImageTaskFn)(void);
 pImageTaskFn user_image_tasks;
 
-/* Flash ²Á³ı¹ı³Ì */
-uint32_t EraseAdd = 0;      //²Á³ıµØÖ·
-uint32_t EraseBlockNum = 0; //ĞèÒª²Á³ıµÄ¿éÊı
-uint32_t EraseBlockCnt = 0; //²Á³ıµÄ¿é¼ÆÊı
+/* Flash æ“¦é™¤è¿‡ç¨‹ */
+uint32_t EraseAdd = 0;      //æ“¦é™¤åœ°å€
+uint32_t EraseBlockNum = 0; //éœ€è¦æ“¦é™¤çš„å—æ•°
+uint32_t EraseBlockCnt = 0; //æ“¦é™¤çš„å—è®¡æ•°
 
-/* FLASH Ğ£Ñé¹ı³Ì */
+/* FLASH æ ¡éªŒè¿‡ç¨‹ */
 uint8_t VerifyStatus = 0;
 
 #define MAX_FLASH_BUFF_LEN      256
@@ -88,7 +88,7 @@ uint8_t flash_buf_uesd_len = 0;
 uint8_t flash_verify_flag = 0;
 uint8_t flash_erase_flag = 0;
 
-uint32_t flash_offset = 0;  //¼ÇÂ¼±à³ÌºÍĞ£ÑéµÄµØÖ·Æ«ÒÆ
+uint32_t flash_offset = 0;  //è®°å½•ç¼–ç¨‹å’Œæ ¡éªŒçš„åœ°å€åç§»
 uint32_t iap_ok=0;
 /*********************************************************************
  * LOCAL FUNCTIONS
@@ -143,7 +143,7 @@ uint16_t OTA_ProcessEvent(uint8_t task_id, uint16_t events)
 
         status = FLASH_ROM_ERASE(EraseAdd ,EraseBlockNum * FLASH_BLOCK_SIZE);
 
-        /* ²Á³ıÊ§°Ü */
+        /* æ“¦é™¤å¤±è´¥ */
         if(status != SUCCESS)
         {
 #if(DEBUG_OTA)
@@ -170,11 +170,11 @@ uint16_t OTA_ProcessEvent(uint8_t task_id, uint16_t events)
 
     if(events & OTA_IAP_END_EVT)
     {
-        /* µ±Ç°µÄÊÇImageA */
-        /* ¹Ø±Õµ±Ç°ËùÓĞÊ¹ÓÃÖĞ¶Ï£¬»òÕß·½±ãÒ»µãÖ±½ÓÈ«²¿¹Ø±Õ */
+        /* å½“å‰çš„æ˜¯ImageA */
+        /* å…³é—­å½“å‰æ‰€æœ‰ä½¿ç”¨ä¸­æ–­ï¼Œæˆ–è€…æ–¹ä¾¿ä¸€ç‚¹ç›´æ¥å…¨éƒ¨å…³é—­ */
         DisableAllIRQ();
 
-        /* ĞŞ¸ÄDataFlash£¬ÇĞ»»ÖÁImageIAP */
+        /* ä¿®æ”¹DataFlashï¼Œåˆ‡æ¢è‡³ImageIAP */
         SwitchImageFlag(IMAGE_IAP_FLAG);
 
         SYS_ResetExecute();
@@ -224,9 +224,9 @@ uint8_t OTA_get_checksum( uint8_t *pData, uint8_t len )
 /*********************************************************************
  * @fn      OTA_IAP_SendCMDDealSta
  *
- * @brief   OTA IAPÖ´ĞĞµÄ×´Ì¬·µ»Ø
+ * @brief   OTA IAPæ‰§è¡Œçš„çŠ¶æ€è¿”å›
  *
- * @param   deal_status - ·µ»ØµÄ×´Ì¬
+ * @param   deal_status - è¿”å›çš„çŠ¶æ€
  *
  * @return  none
  */
@@ -256,7 +256,7 @@ void OTA_IAP_SendCMDDealSta(uint8_t deal_status)
 /*********************************************************************
  * @fn      OTA_IAP_CMDErrDeal
  *
- * @brief   OTA IAPÒì³£ÃüÁîÂë´¦Àí
+ * @brief   OTA IAPå¼‚å¸¸å‘½ä»¤ç å¤„ç†
  *
  * @return  none
  */
@@ -268,31 +268,31 @@ void OTA_IAP_CMDErrDeal(void)
 /*********************************************************************
  * @fn      SwitchImageFlag
  *
- * @brief   ÇĞ»»dataflashÀïµÄImageFlag
+ * @brief   åˆ‡æ¢dataflashé‡Œçš„ImageFlag
  *
- * @param   new_flag    - ÇĞ»»µÄImageFlag
+ * @param   new_flag    - åˆ‡æ¢çš„ImageFlag
  *
  * @return  none
  */
 void SwitchImageFlag(uint8_t new_flag)
 {
-    /* ¶ÁÈ¡µÚÒ»¿é */
+    /* è¯»å–ç¬¬ä¸€å— */
     EEPROM_READ(OTA_DATAFLASH_ADD, (uint32_t *)&block_buf[0], 4);
 
-    /* ²Á³ıµÚÒ»¿é */
+    /* æ“¦é™¤ç¬¬ä¸€å— */
     EEPROM_ERASE(OTA_DATAFLASH_ADD, EEPROM_PAGE_SIZE);
 
-    /* ¸üĞÂImageĞÅÏ¢ */
+    /* æ›´æ–°Imageä¿¡æ¯ */
     block_buf[0] = new_flag;
 
-    /* ±à³ÌDataFlash */
+    /* ç¼–ç¨‹DataFlash */
     EEPROM_WRITE(OTA_DATAFLASH_ADD, (uint32_t *)&block_buf[0], 4);
 }
 
 /*********************************************************************
  * @fn      DisableAllIRQ
  *
- * @brief   ¹Ø±ÕËùÓĞµÄÖĞ¶Ï
+ * @brief   å…³é—­æ‰€æœ‰çš„ä¸­æ–­
  *
  * @return  none
  */
@@ -311,7 +311,7 @@ void DisableAllIRQ(void)
 void OTA_IAP_PROM(void)
 {
     uint8_t  status = 0;
-    /* µ±Ç°ÊÇImageA£¬Ö±½Ó±à³Ì */
+    /* å½“å‰æ˜¯ImageAï¼Œç›´æ¥ç¼–ç¨‹ */
     status = FLASH_ROM_WRITE(OpAdd, flash_buf, flash_buf_uesd_len);
     if(status)
     {
@@ -334,7 +334,7 @@ void OTA_IAP_PROM(void)
 void OTA_IAP_VERIFY(void)
 {
     uint8_t  status = 0;
-    /* µ±Ç°ÊÇImageA£¬Ö±½Ó¶ÁÈ¡ImageBĞ£Ñé */
+    /* å½“å‰æ˜¯ImageAï¼Œç›´æ¥è¯»å–ImageBæ ¡éªŒ */
     status = FLASH_ROM_VERIFY(OpAdd, flash_buf, flash_buf_uesd_len);
     if(status)
     {
@@ -358,7 +358,7 @@ void OTA_IAP_VERIFY(void)
 /*********************************************************************
  * @fn      Rec_OTA_IAP_DataDeal
  *
- * @brief   ½ÓÊÕµ½OTAÊı¾İ°ü´¦Àí
+ * @brief   æ¥æ”¶åˆ°OTAæ•°æ®åŒ…å¤„ç†
  *
  * @return  none
  */
@@ -366,7 +366,7 @@ void Rec_OTA_IAP_DataDeal(void)
 {
     switch(iap_rec_data.other.buf[0])
     {
-        /* ÎÕÊÖ */
+        /* æ¡æ‰‹ */
         case CMD_HAND_SHAKE:
         {
             if( tmos_memcmp(iap_rec_data.handshake.string, hand_shake_string, 7))
@@ -399,7 +399,7 @@ void Rec_OTA_IAP_DataDeal(void)
             }
             break;
         }
-        /* ±à³Ì */
+        /* ç¼–ç¨‹ */
         case CMD_IAP_PROM:
         {
             if(flash_buf_uesd_len==0)
@@ -432,7 +432,7 @@ void Rec_OTA_IAP_DataDeal(void)
                 flash_buf_uesd_len += OpParaDataLen;
                 if( flash_buf_uesd_len>(MAX_FLASH_BUFF_LEN-OpParaDataLen) )
                 {
-                    // Ğ´flash
+                    // å†™flash
                     tmos_set_event(ota_taskID, OTA_FLASH_PROM_EVT);
                     break;
                 }
@@ -446,7 +446,7 @@ void Rec_OTA_IAP_DataDeal(void)
                 flash_buf_uesd_len += OpParaDataLen;
                 if( flash_buf_uesd_len>(MAX_FLASH_BUFF_LEN-OpParaDataLen) )
                 {
-                    // Ğ´flash
+                    // å†™flash
                     tmos_set_event(ota_taskID, OTA_FLASH_PROM_EVT);
                     break;
                 }
@@ -454,7 +454,7 @@ void Rec_OTA_IAP_DataDeal(void)
             OTA_IAP_SendCMDDealSta(VerifyStatus);
             break;
         }
-        /* ²Á³ı -- À¶ÑÀ²Á³ıÓÉÖ÷»ú¿ØÖÆ */
+        /* æ“¦é™¤ -- è“ç‰™æ“¦é™¤ç”±ä¸»æœºæ§åˆ¶ */
         case CMD_IAP_ERASE:
         {
             OpAdd = (uint32_t)(iap_rec_data.erase.addr[0]);
@@ -484,7 +484,7 @@ void Rec_OTA_IAP_DataDeal(void)
             EraseAdd = OpAdd;
             EraseBlockCnt = 0;
 
-            /* ¼ìÑé¾Í·ÅÔÚ²Á³ıÀïÇå0 */
+            /* æ£€éªŒå°±æ”¾åœ¨æ“¦é™¤é‡Œæ¸…0 */
             VerifyStatus = 0;
 
             iap_ok = 1;
@@ -514,7 +514,7 @@ void Rec_OTA_IAP_DataDeal(void)
             }
             break;
         }
-        /* Ğ£Ñé */
+        /* æ ¡éªŒ */
         case CMD_IAP_VERIFY:
         {
             uint8_t  status=0;
@@ -522,7 +522,7 @@ void Rec_OTA_IAP_DataDeal(void)
             {
                 if(flash_buf_uesd_len)
                 {
-                    /* µ±Ç°ÊÇImageA£¬Ö±½Ó±à³Ì */
+                    /* å½“å‰æ˜¯ImageAï¼Œç›´æ¥ç¼–ç¨‹ */
                     status = FLASH_ROM_WRITE(OpAdd, flash_buf, flash_buf_uesd_len);
                     if(status)
                     {
@@ -551,7 +551,7 @@ void Rec_OTA_IAP_DataDeal(void)
                 flash_buf_uesd_len += OpParaDataLen;
                 if( flash_buf_uesd_len>(MAX_FLASH_BUFF_LEN-OpParaDataLen) )
                 {
-                    // Ğ£Ñéflash
+                    // æ ¡éªŒflash
                     tmos_set_event(ota_taskID, OTA_FLASH_VRIF_EVT);
                     break;
                 }
@@ -565,7 +565,7 @@ void Rec_OTA_IAP_DataDeal(void)
                 flash_buf_uesd_len += OpParaDataLen;
                 if( flash_buf_uesd_len>(MAX_FLASH_BUFF_LEN-OpParaDataLen) )
                 {
-                    // Ğ£Ñéflash
+                    // æ ¡éªŒflash
                     tmos_set_event(ota_taskID, OTA_FLASH_VRIF_EVT);
                     break;
                 }
@@ -574,7 +574,7 @@ void Rec_OTA_IAP_DataDeal(void)
             OTA_IAP_SendCMDDealSta(VerifyStatus);
             break;
         }
-        /* ±à³Ì½áÊø */
+        /* ç¼–ç¨‹ç»“æŸ */
         case CMD_IAP_END:
         {
 #if(DEBUG_OTA)
@@ -583,7 +583,7 @@ void Rec_OTA_IAP_DataDeal(void)
             if(flash_buf_uesd_len)
             {
                 uint8_t  status = 0;
-                /* µ±Ç°ÊÇImageA£¬Ö±½Ó¶ÁÈ¡ImageBĞ£Ñé */
+                /* å½“å‰æ˜¯ImageAï¼Œç›´æ¥è¯»å–ImageBæ ¡éªŒ */
                 status = FLASH_ROM_VERIFY(OpAdd, flash_buf, flash_buf_uesd_len);
                 if(status)
                 {
@@ -605,7 +605,7 @@ void Rec_OTA_IAP_DataDeal(void)
             }
             if(iap_ok)
             {
-                /* ÑÓ³Ù¸´Î» */
+                /* å»¶è¿Ÿå¤ä½ */
                 tmos_start_task(ota_taskID, OTA_IAP_END_EVT, 16);
             }
             else {
@@ -650,7 +650,7 @@ void Rec_OTA_IAP_DataDeal(void)
             }
             break;
         }
-        /* µ¥ÔØ²¨ÃüÁî */
+        /* å•è½½æ³¢å‘½ä»¤ */
         case CMD_SINGLE_CHANNEL:
         {
             if(iap_rec_data.other.buf[1]==(unsigned char)(1-2))
@@ -667,7 +667,7 @@ void Rec_OTA_IAP_DataDeal(void)
             break;
         }
 
-        /* µ¥ÔØ²¨¹¦ÂÊ */
+        /* å•è½½æ³¢åŠŸç‡ */
         case CMD_SINGLE_POWER:
         {
             if(iap_rec_data.other.buf[1]==(unsigned char)(1-2))
@@ -683,7 +683,7 @@ void Rec_OTA_IAP_DataDeal(void)
             break;
         }
 
-        /* ¸ºÔØµçÈİ */
+        /* è´Ÿè½½ç”µå®¹ */
         case CMD_CAPACITANCE:
         {
             if(iap_rec_data.other.buf[1]==(unsigned char)(1-2))
@@ -758,11 +758,11 @@ void Rec_OTA_IAP_DataDeal(void)
 /*********************************************************************
  * @fn      OTA_USB_IAPWriteData
  *
- * @brief   OTA Í¨µÀÊı¾İ½ÓÊÕÍê³É´¦Àí
+ * @brief   OTA é€šé“æ•°æ®æ¥æ”¶å®Œæˆå¤„ç†
  *
- * @param   index   - OTA Í¨µÀĞòºÅ
- * @param   p_data  - Ğ´ÈëµÄÊı¾İ
- * @param   w_len   - Ğ´ÈëµÄ³¤¶È
+ * @param   index   - OTA é€šé“åºå·
+ * @param   p_data  - å†™å…¥çš„æ•°æ®
+ * @param   w_len   - å†™å…¥çš„é•¿åº¦
  *
  * @return  none
  */
@@ -775,7 +775,7 @@ void OTA_USB_IAPWriteData(unsigned char *p_data, unsigned char w_len)
     else
     {
         tmos_memcpy((unsigned char *)&iap_rec_data, p_data, p_data[1]+3);
-        // IAPĞ­ÒéµÄÊı¾İ³¤¶È°üº¬ÁËµØÖ·Á½×Ö½Ú
+        // IAPåè®®çš„æ•°æ®é•¿åº¦åŒ…å«äº†åœ°å€ä¸¤å­—èŠ‚
         iap_rec_data.program.len -= 2;
         Rec_OTA_IAP_DataDeal();
     }

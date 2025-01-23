@@ -3,15 +3,15 @@
  * Author             : WCH
  * Version            : V1.0
  * Date               : 2022/03/15
- * Description        : rfÊÕ·¢²âÊÔÀı³Ì£¬µ¥Ïò·¢ËÍ
- *                      PB15µÍµçÆ½Îª·¢ËÍÄ£Ê½£¬Ä¬ÈÏÎª½ÓÊÕÄ£Ê½
+ * Description        : rfæ”¶å‘æµ‹è¯•ä¾‹ç¨‹ï¼Œå•å‘å‘é€
+ *                      PB15ä½ç”µå¹³ä¸ºå‘é€æ¨¡å¼ï¼Œé»˜è®¤ä¸ºæ¥æ”¶æ¨¡å¼
  *
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * SPDX-License-Identifier: Apache-2.0
  *******************************************************************************/
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include <rf.h>
 #include <SLEEP.h>
 #include "rf_device.h"
@@ -26,7 +26,7 @@
 
 #define  RF_TEST_PERIDOC   500  // 2K
 
-#define RF_REPORT_DISCONNECT_DELAY      (160*4)//ÑÓ³ÙÉÏ±¨¶Ï¿ª£¬·ÀÖ¹Ë¯Ãß»½ĞÑµÄ¶ÌÔİ¶ÏÁ¬Ó°Ïì×´Ì¬ÉÏ±¨
+#define RF_REPORT_DISCONNECT_DELAY      (160*4)//å»¶è¿Ÿä¸ŠæŠ¥æ–­å¼€ï¼Œé˜²æ­¢ç¡çœ å”¤é†’çš„çŸ­æš‚æ–­è¿å½±å“çŠ¶æ€ä¸ŠæŠ¥
 
 RF_con_status_t RF_state;
 
@@ -57,7 +57,7 @@ uint8_t gRetry = 0;
 /*********************************************************************
  * @fn      RF_check_con_status
  *
- * @brief   ¼ì²éµ±Ç°Á¬½Ó×´Ì¬
+ * @brief   æ£€æŸ¥å½“å‰è¿æ¥çŠ¶æ€
  *
  * @return  none
  */
@@ -73,7 +73,7 @@ uint8_t RF_check_con_status(RF_con_status_t status)
 /*********************************************************************
  * @fn      RF_set_con_status
  *
- * @brief   ÉèÖÃµ±Ç°Á¬½Ó×´Ì¬
+ * @brief   è®¾ç½®å½“å‰è¿æ¥çŠ¶æ€
  *
  * @return  none
  */
@@ -86,7 +86,7 @@ void RF_set_con_status(RF_con_status_t status)
 /*******************************************************************************
  * @fn      rf_get_txbuf_num
  *
- * @brief   RF »ñÈ¡µ±Ç°·¢ËÍ»º³åÖĞµÄ°ü¸öÊı
+ * @brief   RF è·å–å½“å‰å‘é€ç¼“å†²ä¸­çš„åŒ…ä¸ªæ•°
  *
  * @param   None.
  *
@@ -109,7 +109,7 @@ uint8_t rf_get_txbuf_num( void )
 /*******************************************************************************
  * @fn      rf_get_data
  *
- * @brief   »ñÈ¡Ò»°üRF½ÓÊÕDMAÖĞµÄÊı¾İ
+ * @brief   è·å–ä¸€åŒ…RFæ¥æ”¶DMAä¸­çš„æ•°æ®
  *
  * @param   None.
  *
@@ -131,7 +131,7 @@ uint8_t *rf_get_data( uint8_t *pLen)
 /*******************************************************************************
  * @fn      rf_delete_data
  *
- * @brief   É¾³ıÒ»°üRF½ÓÊÕDMAÖĞµÄÊı¾İ
+ * @brief   åˆ é™¤ä¸€åŒ…RFæ¥æ”¶DMAä¸­çš„æ•°æ®
  *
  * @param   None.
  *
@@ -147,7 +147,7 @@ void rf_delete_data()
 /*******************************************************************************
  * @fn      rf_send_data
  *
- * @brief   ÏòRF·¢ËÍDMAÖĞÌí¼ÓÒ»°üÊı¾İ
+ * @brief   å‘RFå‘é€DMAä¸­æ·»åŠ ä¸€åŒ…æ•°æ®
  *
  * @param   None.
  *
@@ -181,7 +181,7 @@ uint8_t rf_send_data( uint8_t *pData, uint8_t len)
 /*******************************************************************************
  * @fn      RF_ProcessCallBack
  *
- * @brief   RF ×´Ì¬»Øµ÷£¬×¢Òâ´Ëº¯ÊıÎªÖĞ¶ÏÖĞµ÷ÓÃ
+ * @brief   RF çŠ¶æ€å›è°ƒï¼Œæ³¨æ„æ­¤å‡½æ•°ä¸ºä¸­æ–­ä¸­è°ƒç”¨
  *
  * @param   None.
  *
@@ -190,12 +190,12 @@ uint8_t rf_send_data( uint8_t *pData, uint8_t len)
 __HIGH_CODE
 void RF_ProcessCallBack( rfRole_States_t sta,uint8_t id  )
 {
-    // ÊÕµ½Êı¾İ»Øµ÷
+    // æ”¶åˆ°æ•°æ®å›è°ƒ
     if( sta & RF_STATE_RX )
     {
         tmos_set_event( rfTaskID, RF_RECV_PROCESS_EVENT );
     }
-    // ½ÓÊÕDMAÂú
+    // æ¥æ”¶DMAæ»¡
     if( sta & RF_STATE_RBU )
     {
         PRINT( "!rbu\n" );
@@ -218,7 +218,7 @@ void RF_ProcessCallBack( rfRole_States_t sta,uint8_t id  )
 /*******************************************************************************
  * @fn      rfRoleBoundProcess
  *
- * @brief   Á¬½Ó°ó¶¨×´Ì¬»Øµ÷
+ * @brief   è¿æ¥ç»‘å®šçŠ¶æ€å›è°ƒ
  *
  * @param   None.
  *
@@ -238,14 +238,14 @@ void rfRoleBoundProcess( staBound_t *pSta )
 //        tmos_start_reload_task(rfTaskID, RF_TEST_TX_EVENT, 1600);
         RF_set_con_status(RF_CON_CONNECTED);
         gDeviceId = pSta->devId;
-        // ÅĞ¶Ïµ±Ç°RF½ÇÉ«
+        // åˆ¤æ–­å½“å‰RFè§’è‰²
         if( !(pSta->role&1) )
         {
-            // µ±Ç°Îª½ÓÊÕ¶Ë£¨dongle£©
+            // å½“å‰ä¸ºæ¥æ”¶ç«¯ï¼ˆdongleï¼‰
         }
         else
         {
-            // µ±Ç°Îª·¢ËÍ¶Ë£¨Êó±ê£©
+            // å½“å‰ä¸ºå‘é€ç«¯ï¼ˆé¼ æ ‡ï¼‰
             if((nvs_flash_info.rf_device_id!=pSta->devId) ||
                 (!tmos_memcmp(nvs_flash_info.peer_mac, pSta->PeerInfo, 6)))
             {
@@ -266,13 +266,13 @@ void rfRoleBoundProcess( staBound_t *pSta )
     {
         if( !(pSta->role&1) )
         {
-            // µ±Ç°Îª½ÓÊÕ¶Ë£¨dongle£©
+            // å½“å‰ä¸ºæ¥æ”¶ç«¯ï¼ˆdongleï¼‰
         }
         else
         {
-            // µ±Ç°Îª·¢ËÍ¶Ë£¨Êó±ê£©
+            // å½“å‰ä¸ºå‘é€ç«¯ï¼ˆé¼ æ ‡ï¼‰
         }
-        // RF×Ô¶¯»ØÁ¬³¬Ê±Ê§°Ü
+        // RFè‡ªåŠ¨å›è¿è¶…æ—¶å¤±è´¥
         if( pSta->status == FAILURE )
         {
             if(RF_check_con_status(RF_CON_CONNECTED))
@@ -284,11 +284,11 @@ void rfRoleBoundProcess( staBound_t *pSta )
             RF_set_con_status(RF_CON_IDEL);
             tmos_set_event( rfTaskID, RF_START_BOUND_EVENT );
         }
-        // RFµ±Ç°Á¬½Ó¶Ï¿ª£¬×Ô¶¯ÆôÓÃ»ØÁ¬
+        // RFå½“å‰è¿æ¥æ–­å¼€ï¼Œè‡ªåŠ¨å¯ç”¨å›è¿
         else if( pSta->status == bleTimeout )
         {
 #if(CLK_OSC32K)
-            Lib_Calibration_LSI(); // Ğ£×¼ÄÚ²¿RC
+            Lib_Calibration_LSI(); // æ ¡å‡†å†…éƒ¨RC
 #endif
             PRINT( "t o.\n" );
             tmos_start_task(rfTaskID, RF_REPORT_DISCONNECT_EVENT, RF_REPORT_DISCONNECT_DELAY);
@@ -299,7 +299,7 @@ void rfRoleBoundProcess( staBound_t *pSta )
 /*******************************************************************************
  * @fn      RF_ProcessEvent
  *
- * @brief   RF²ãÏµÍ³ÈÎÎñ´¦Àí
+ * @brief   RFå±‚ç³»ç»Ÿä»»åŠ¡å¤„ç†
  *
  * @param   None.
  *
@@ -329,10 +329,10 @@ tmosEvents RF_ProcessEvent( tmosTaskID task_id, tmosEvents events )
 //        PRINT("start tx mode\n");
 #if (KEYBOARD)
         bound.devType = DEVICE_KEYBOARD_TYPE;
-        bound.deviceId = DEVICE_KEYBOARD; // RF_ROLE_ID_INVALD±íÊ¾ÓÉdongle¶Ë¾ö¶¨IDºÅ£¬Ò²¿ÉÖ¸¶¨IDºÅ
+        bound.deviceId = DEVICE_KEYBOARD; // RF_ROLE_ID_INVALDè¡¨ç¤ºç”±dongleç«¯å†³å®šIDå·ï¼Œä¹Ÿå¯æŒ‡å®šIDå·
 #elif (MOUSE)
         bound.devType = DEVICE_MOUSE_TYPE;
-        bound.deviceId = RF_ROLE_ID_INVALD; // RF_ROLE_ID_INVALD±íÊ¾ÓÉdongle¶Ë¾ö¶¨IDºÅ£¬Ò²¿ÉÖ¸¶¨IDºÅ
+        bound.deviceId = RF_ROLE_ID_INVALD; // RF_ROLE_ID_INVALDè¡¨ç¤ºç”±dongleç«¯å†³å®šIDå·ï¼Œä¹Ÿå¯æŒ‡å®šIDå·
 #else
         PRINT("devType ERR!\n");
         while(1);
@@ -396,8 +396,8 @@ tmosEvents RF_ProcessEvent( tmosTaskID task_id, tmosEvents events )
             RFRole_Shut();
             peripheral_enter_sleep();
             PWR_PeriphWakeUpCfg( DISABLE, RB_SLP_RTC_WAKE, Long_Delay );
-//            LowPower_Sleep( RB_PWR_RAM24K | RB_PWR_RAM2K | RB_PWR_EXTEND ); //Ö»±£Áô24+2K SRAM ¹©µç
-            HSECFG_Current(HSE_RCur_100); // ½µÎª¶î¶¨µçÁ÷(µÍ¹¦ºÄº¯ÊıÖĞÌáÉıÁËHSEÆ«ÖÃµçÁ÷)
+//            LowPower_Sleep( RB_PWR_RAM24K | RB_PWR_RAM2K | RB_PWR_EXTEND ); //åªä¿ç•™24+2K SRAM ä¾›ç”µ
+            HSECFG_Current(HSE_RCur_100); // é™ä¸ºé¢å®šç”µæµ(ä½åŠŸè€—å‡½æ•°ä¸­æå‡äº†HSEåç½®ç”µæµ)
 //            LowPower_Shutdown(RB_PWR_RAM2K);
 //            SYS_ResetExecute();
             RFIP_WakeUpRegInit();
@@ -457,7 +457,7 @@ tmosEvents RF_ProcessEvent( tmosTaskID task_id, tmosEvents events )
 /*******************************************************************************
  * @fn      RF_ReStart
  *
- * @brief   RFÖØĞÂ³õÊ¼»¯
+ * @brief   RFé‡æ–°åˆå§‹åŒ–
  *
  * @param   None.
  *
@@ -514,7 +514,7 @@ void RF_stop( void )
 /*******************************************************************************
  * @fn      RF_Init
  *
- * @brief   RFÓ¦ÓÃ²ã³õÊ¼»¯
+ * @brief   RFåº”ç”¨å±‚åˆå§‹åŒ–
  *
  * @param   None.
  *

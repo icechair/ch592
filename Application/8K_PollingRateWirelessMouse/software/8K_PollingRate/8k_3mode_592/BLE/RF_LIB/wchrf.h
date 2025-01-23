@@ -87,15 +87,15 @@ typedef struct tag_ble_config
 /* TMOS clock config struct */
 typedef struct tag_ble_clock_config
 {
-    pfnGetSysClock getClockValue;  // TMOSÏµÍ³Ê±¼ä
+    pfnGetSysClock getClockValue;  // TMOSç³»ç»Ÿæ—¶é—´
     uint32_t ClockMaxCount;         // The maximum count value
     uint16_t ClockFrequency;        // The timing clock frequency(Hz)
     uint16_t ClockAccuracy;         // The timing clock accuracy(ppm)
 
-    uint32_t Clock1Frequency;   // Ê±ÖÓÆµÂÊ kHz
-    pfnGetSysClock getClock1Value; // RFÍ¨ĞÅ¹ÜÀíÊ±¼ä £¨¾«¶ÈÒªÇó¸ü¸ß£©
-    pfnSetSysClockIRQ SetPendingIRQ;  // RFÍ¨ĞÅ¹ÜÀíÏà¹ØÖĞ¶Ï
-    pfnSetSysClockTign SetTign;  // RFÍ¨ĞÅ¹ÜÀí ¶¨Ê±Æ÷´¥·¢ÖµĞ£×¼
+    uint32_t Clock1Frequency;   // æ—¶é’Ÿé¢‘ç‡ kHz
+    pfnGetSysClock getClock1Value; // RFé€šä¿¡ç®¡ç†æ—¶é—´ ï¼ˆç²¾åº¦è¦æ±‚æ›´é«˜ï¼‰
+    pfnSetSysClockIRQ SetPendingIRQ;  // RFé€šä¿¡ç®¡ç†ç›¸å…³ä¸­æ–­
+    pfnSetSysClockTign SetTign;  // RFé€šä¿¡ç®¡ç† å®šæ—¶å™¨è§¦å‘å€¼æ ¡å‡†
 }tmosTimeConfig_t;
 
 /* pa control config struct */
@@ -193,7 +193,7 @@ extern const uint8_t VER_LIB[];  // LIB version
 #define ABS(n)     (((n) < 0) ? -(n) : (n))
 #endif
 
-/* TxPower define(Accuracy:¡À2dBm) */
+/* TxPower define(Accuracy:Â±2dBm) */
 #define LL_TX_POWEER_MINUS_20_DBM       0x01
 #define LL_TX_POWEER_MINUS_15_DBM       0x03
 #define LL_TX_POWEER_MINUS_10_DBM       0x05

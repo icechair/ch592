@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.0
  * Date               : 2023/02/24
- * Description        : LCDÑİÊ¾
+ * Description        : LCDæ¼”ç¤º
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * Attention: This software (modified or not) and binary are used for 
@@ -23,7 +23,7 @@ unsigned char const lcd[10]={0x7d, 0x60, 0x3e, 0x7a, 0x63, 0x5b, 0x5f, 0x70, 0x0
      |----| .P
        D
 */
-/* ×¢Òâ£ºÊ¹ÓÃ´ËÀı³Ì£¬ÏÂÔØÊ±Ğè¹Ø±ÕÍâ²¿ÊÖ¶¯¸´Î»¹¦ÄÜ */
+/* æ³¨æ„ï¼šä½¿ç”¨æ­¤ä¾‹ç¨‹ï¼Œä¸‹è½½æ—¶éœ€å…³é—­å¤–éƒ¨æ‰‹åŠ¨å¤ä½åŠŸèƒ½ */
 int main()
 {
     uint32_t VER = 0;
@@ -43,11 +43,11 @@ int main()
     LCD_WriteData8( lcd[8] );
 
 
-    /* LCD + sleep Ê¾Àı */
+    /* LCD + sleep ç¤ºä¾‹ */
 #if 1
-    /* ÅäÖÃ»½ĞÑÔ´Îª GPIO - PB0 */
+    /* é…ç½®å”¤é†’æºä¸º GPIO - PB0 */
     GPIOB_ModeCfg(GPIO_Pin_0, GPIO_ModeIN_PU);
-    GPIOB_ITModeCfg(GPIO_Pin_0, GPIO_ITMode_FallEdge); // ÏÂ½µÑØ»½ĞÑ
+    GPIOB_ITModeCfg(GPIO_Pin_0, GPIO_ITMode_FallEdge); // ä¸‹é™æ²¿å”¤é†’
     PFIC_EnableIRQ(GPIO_B_IRQn);
     PWR_PeriphWakeUpCfg(ENABLE, RB_SLP_GPIO_WAKE, Long_Delay);
     VER = (*((PUINT32)ROM_CFG_VERISON));
@@ -55,12 +55,12 @@ int main()
     {
         aux_power = R16_AUX_POWER_ADJ;
         sys_safe_access_enable();
-        R16_AUX_POWER_ADJ |= RB_ULPLDO_ADJ;      //Ë¯ÃßÇ°±ØĞë¼Ó´Ë´úÂë
+        R16_AUX_POWER_ADJ |= RB_ULPLDO_ADJ;      //ç¡çœ å‰å¿…é¡»åŠ æ­¤ä»£ç 
         sys_safe_access_disable();
     }
-    // ×¢Òâµ±Ö÷ÆµÎª80MÊ±£¬SleepË¯Ãß»½ĞÑÖĞ¶Ï²»¿Éµ÷ÓÃflashÄÚ´úÂë¡£
-    LowPower_Sleep(RB_PWR_RAM24K | RB_PWR_RAM2K | RB_XT_PRE_EN); //Ö»±£Áô24+2K SRAM ¹©µç
-    HSECFG_Current(HSE_RCur_100);                 // ½µÎª¶î¶¨µçÁ÷(µÍ¹¦ºÄº¯ÊıÖĞÌáÉıÁËHSEÆ«ÖÃµçÁ÷)
+    // æ³¨æ„å½“ä¸»é¢‘ä¸º80Mæ—¶ï¼ŒSleepç¡çœ å”¤é†’ä¸­æ–­ä¸å¯è°ƒç”¨flashå†…ä»£ç ã€‚
+    LowPower_Sleep(RB_PWR_RAM24K | RB_PWR_RAM2K | RB_XT_PRE_EN); //åªä¿ç•™24+2K SRAM ä¾›ç”µ
+    HSECFG_Current(HSE_RCur_100);                 // é™ä¸ºé¢å®šç”µæµ(ä½åŠŸè€—å‡½æ•°ä¸­æå‡äº†HSEåç½®ç”µæµ)
     if((VER&0xFF000000) == 0xFF000000)
     {
         sys_safe_access_enable();
@@ -76,7 +76,7 @@ int main()
 /*********************************************************************
  * @fn      GPIOB_IRQHandler
  *
- * @brief   GPIOBÖĞ¶Ïº¯Êı
+ * @brief   GPIOBä¸­æ–­å‡½æ•°
  *
  * @return  none
  */

@@ -101,7 +101,7 @@ void HAL_LCD_ShowHumidity(float humidity)
     uint16_t temp;
 
     temp = (uint16_t)(humidity * 10);
-    if (humidity >= 100) //show ¡®100%¡¯
+    if (humidity >= 100) //show â€˜100%â€™
     {
         LCD_WriteByte0( LCD_NUM[0] | 0x01);
         LCD_WriteByte1( LCD_NUM[0]);

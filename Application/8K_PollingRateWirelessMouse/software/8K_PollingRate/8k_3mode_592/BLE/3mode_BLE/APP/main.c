@@ -11,7 +11,7 @@
  *******************************************************************************/
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include "CONFIG.h"
 #include "HAL.h"
 #include "hiddev.h"
@@ -33,13 +33,13 @@ const uint8_t MacAddr[6] = {0x84, 0xC2, 0xE4, 0x03, 0x02, 0x02};
 #define IAP_SAFE_FLAG_BLE        0x30de5821
 #define IAP_SAFE_FLAG_MASK       0x30de5820
 
-/* ÓÃÓÚAPPÅĞ¶ÏÎÄ¼şÓĞĞ§ĞÔ */
+/* ç”¨äºAPPåˆ¤æ–­æ–‡ä»¶æœ‰æ•ˆæ€§ */
 __attribute__((aligned(4))) uint32_t save_Flag __attribute__((section(".ImageFlag"))) = IAP_SAFE_FLAG_BLE;
 
 /*********************************************************************
  * @fn      Main_Circulation
  *
- * @brief   Ö÷Ñ­»·
+ * @brief   ä¸»å¾ªç¯
  *
  * @return  none
  */
@@ -142,7 +142,7 @@ void trans_RF_receive( uint8_t *pData, uint8_t len )
 /*********************************************************************
  * @fn      main
  *
- * @brief   Ö÷º¯Êı
+ * @brief   ä¸»å‡½æ•°
  *
  * @return  none
  */

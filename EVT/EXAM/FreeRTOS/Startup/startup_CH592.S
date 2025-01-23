@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.0.1
  * Date               : 2023/10/25
- * Description        : CH592 FreeRTOSÆô¶¯ÎÄ¼ş
+ * Description        : CH592 FreeRTOSå¯åŠ¨æ–‡ä»¶
  *********************************************************************************
  * Copyright (c) 2023 Nanjing Qinheng Microelectronics Co., Ltd.
  * Attention: This software (modified or not) and binary are used for
@@ -198,19 +198,19 @@ handle_reset:
 	addi a0, a0, 4
 	bltu a0, a1, 1b
 2:
-	/* Á÷Ë®Ïß¿ØÖÆÎ» & ¶¯Ì¬Ô¤²â¿ØÖÆÎ» */
+	/* æµæ°´çº¿æ§åˆ¶ä½ & åŠ¨æ€é¢„æµ‹æ§åˆ¶ä½ */
 	li t0, 0x1f
 	csrw 0xbc0, t0
 
-	/* ´ò¿ªÓ²¼şÑ¹Õ»£¬¹Ø±ÕÖĞ¶ÏÇ¶Ì×£¬ÔÚÖĞ¶Ïº¯ÊıÈë¿Ú´¦ÔÙ´ò¿ªÖĞ¶ÏÇ¶Ì× */
+	/* æ‰“å¼€ç¡¬ä»¶å‹æ ˆï¼Œå…³é—­ä¸­æ–­åµŒå¥—ï¼Œåœ¨ä¸­æ–­å‡½æ•°å…¥å£å¤„å†æ‰“å¼€ä¸­æ–­åµŒå¥— */
 	li t0, 0x01
 	csrw 0x804, t0
 
-	/* Ê¹ÓÃ»úÆ÷Ä£Ê½£¬ÔÚfreertosÖĞ´ò¿ªÖĞ¶Ï */
+	/* ä½¿ç”¨æœºå™¨æ¨¡å¼ï¼Œåœ¨freertosä¸­æ‰“å¼€ä¸­æ–­ */
     li t0, 0x1800
     csrw mstatus, t0
 
-	/* ÅäÖÃÏµÍ³Òì³£¼°ÖĞ¶ÏÏòÁ¿±í£¬ÓÃ»§ÕæÕıÊ¹ÓÃµÄÏòÁ¿±íÔÚÍ³Ò»Èë¿Ú unified_interrupt_entry ÖĞ´¦Àí */
+	/* é…ç½®ç³»ç»Ÿå¼‚å¸¸åŠä¸­æ–­å‘é‡è¡¨ï¼Œç”¨æˆ·çœŸæ­£ä½¿ç”¨çš„å‘é‡è¡¨åœ¨ç»Ÿä¸€å…¥å£ unified_interrupt_entry ä¸­å¤„ç† */
 	la t0, _vector_base
     ori t0, t0, 3
 	csrw mtvec, t0

@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.0
  * Date               : 2018/12/10
- * Description        : HID Éè±¸ÈÎÎñ´¦Àí³ÌÐò
+ * Description        : HID è®¾å¤‡ä»»åŠ¡å¤„ç†ç¨‹åº
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * Attention: This software (modified or not) and binary are used for 
@@ -320,7 +320,7 @@ uint8_t HidDev_Report(uint8_t id, uint8_t type, uint8_t len, uint8_t *pData)
             return hidDevSendReport(id, type, len, pData);
         }
     }
-    // else if not already advertising ²»¿ª¹ã²¥£¡
+    // else if not already advertising ä¸å¼€å¹¿æ’­ï¼
 //    else if(hidDevGapState != GAPROLE_ADVERTISING)
 //    {
 //        // if bonded
@@ -773,7 +773,7 @@ static void hidDevDisconnected(void)
     hidDevHandleConnStatusCB(gapConnHandle, LINKDB_STATUS_UPDATE_REMOVED);
 
     // Reset state variables
-    // 2023 8 31 ÐÞ¸Ä£¬¸ÄÎªÔÚÓ¦ÓÃ²ã¶Ï¿ª»Øµ÷ÖÐ»Ö¸´Ä¬ÈÏÖµ
+    // 2023 8 31 ä¿®æ”¹ï¼Œæ”¹ä¸ºåœ¨åº”ç”¨å±‚æ–­å¼€å›žè°ƒä¸­æ¢å¤é»˜è®¤å€¼
 //    hidDevConnSecure = FALSE;
     hidProtocolMode = HID_PROTOCOL_MODE_REPORT;
 
@@ -895,7 +895,7 @@ static void hidDevPairStateCB(uint16_t connHandle, uint8_t state, uint8_t status
     {
         if(status == SUCCESS)
         {
-            // Åä¶ÔÁ¬½Ó³É¹¦
+            // é…å¯¹è¿žæŽ¥æˆåŠŸ
             if( tmos_get_task_timer( hidEmuTaskId, SEND_DISCONNECT_EVT ) || (tmos_get_event(hidEmuTaskId)&SEND_DISCONNECT_EVT) )
             {
                 tmos_stop_task(hidEmuTaskId, SEND_DISCONNECT_EVT);
@@ -915,7 +915,7 @@ static void hidDevPairStateCB(uint16_t connHandle, uint8_t state, uint8_t status
     }
     else if(state == GAPBOND_PAIRING_STATE_BOND_SAVED)
     {
-        // Åä¶ÔÁ¬½Ó³É¹¦
+        // é…å¯¹è¿žæŽ¥æˆåŠŸ
         if( tmos_get_task_timer( hidEmuTaskId, SEND_DISCONNECT_EVT ) || (tmos_get_event(hidEmuTaskId)&SEND_DISCONNECT_EVT) )
         {
             tmos_stop_task(hidEmuTaskId, SEND_DISCONNECT_EVT);
@@ -1116,7 +1116,7 @@ static uint8_t hidDevSendReport(uint8_t id, uint8_t type, uint8_t len, uint8_t *
         // if notifications are enabled
         if((pAttr = GATT_FindHandle(pRpt->cccdHandle, &retHandle)) != NULL)
         {
-            // ²»¹»´æÁË£¬Ö±½Ó¿ªÆô
+            // ä¸å¤Ÿå­˜äº†ï¼Œç›´æŽ¥å¼€å¯
 //            uint16_t value;
 //
 //            value = GATTServApp_ReadCharCfg(gapConnHandle, (gattCharCfg_t *)pAttr->pValue);

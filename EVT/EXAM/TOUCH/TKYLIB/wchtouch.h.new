@@ -1,0 +1,9 @@
+#ifndef __WCHTOUCH_H__
+#define __WCHTOUCH_H__
+
+/*********************************************************************
+ * GLOBAL MACROS
+ */
+/*****************filter*****************/
+#define FILTER_NONE    		      0       //--鏃犳护娉㈠櫒--
+#define FILTER_MODE_1    	      1       //--婊ゆ尝鍣ㄦā寮

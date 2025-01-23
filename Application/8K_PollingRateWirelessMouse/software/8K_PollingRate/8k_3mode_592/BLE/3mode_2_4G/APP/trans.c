@@ -10,7 +10,7 @@
  *******************************************************************************/
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include <rf.h>
 #include "rf_device.h"
 #include "CH59x_common.h"
@@ -24,8 +24,8 @@
  */
 uint8_t tran_taskID;
 
-#define TRANS_SEND_BUF_NUM      10   //  »º´æ¶àÉÙ¸ö°ü
-#define TRANS_MAX_BUF_LEN      40   //  µ¥°ü×î³¤
+#define TRANS_SEND_BUF_NUM      10   //  ç¼“å­˜å¤šå°‘ä¸ªåŒ…
+#define TRANS_MAX_BUF_LEN      40   //  å•åŒ…æœ€é•¿
 
 typedef struct
 {
@@ -103,7 +103,7 @@ uint8_t trans_send_data( uint8_t *pData, uint8_t len )
     {
         if(RF_check_con_status(RF_CON_CONNECTED))
         {
-            // ÅĞ¶ÏÊÇ·ñ¿ÕÓàÁ½¸öÊı¾İ°ü£¬ĞèÒªÔ¤ÁôÒ»¸ö¸øÆäËûÍ¨µÀÊı¾İÊ¹ÓÃ
+            // åˆ¤æ–­æ˜¯å¦ç©ºä½™ä¸¤ä¸ªæ•°æ®åŒ…ï¼Œéœ€è¦é¢„ç•™ä¸€ä¸ªç»™å…¶ä»–é€šé“æ•°æ®ä½¿ç”¨
             if( !(((RF_DMADESCTypeDef *)pDMATxGet->NextDescAddr)->Status & STA_DMA_ENABLE) )
             {
                 if(rf_send_data( pData, len))
@@ -129,12 +129,12 @@ uint8_t trans_send_data( uint8_t *pData, uint8_t len )
 /*********************************************************************
  * @fn      trans_process_event
  *
- * @brief   trans ÊÂ¼ş´¦Àí
+ * @brief   trans äº‹ä»¶å¤„ç†
  *
- * @param   task_id - ÈÎÎñID
- * @param   events  - ÊÂ¼ş±êÖ¾
+ * @param   task_id - ä»»åŠ¡ID
+ * @param   events  - äº‹ä»¶æ ‡å¿—
  *
- * @return  Î´Íê³ÉÊÂ¼ş
+ * @return  æœªå®Œæˆäº‹ä»¶
  */
 __HIGH_CODE
 uint16_t trans_process_event(uint8_t task_id, uint16_t events)
@@ -198,27 +198,27 @@ uint16_t trans_process_event(uint8_t task_id, uint16_t events)
         idel_sleep_flag = 1;
         PWR_PeriphWakeUpCfg( DISABLE, RB_SLP_RTC_WAKE, Long_Delay );
 
-        R8_UDEV_CTRL &= ~RB_UD_PORT_EN;                   // ÔÊĞíUSB¶Ë¿Ú
+        R8_UDEV_CTRL &= ~RB_UD_PORT_EN;                   // å…è®¸USBç«¯å£
         PRINT("%x %x\n",GPIOB_ReadPortPin((1<<10)),GPIOB_ReadPortPin((1<<10)));
         GPIOB_ModeCfg((1<<10) ,GPIO_ModeIN_PU);
         GPIOB_ModeCfg((1<<11) ,GPIO_ModeIN_PU);
         if(GPIOB_ReadPortPin((1<<10)))
-            GPIOB_ITModeCfg( (1<<10), GPIO_ITMode_LowLevel ); // ÏÂ½µÑØ»½ĞÑ
+            GPIOB_ITModeCfg( (1<<10), GPIO_ITMode_LowLevel ); // ä¸‹é™æ²¿å”¤é†’
         else {
             GPIOB_ITModeCfg( (1<<10), GPIO_ITMode_HighLevel ); //
         }
         if(GPIOB_ReadPortPin((1<<11)))
-            GPIOB_ITModeCfg( (1<<11), GPIO_ITMode_LowLevel ); // ÏÂ½µÑØ»½ĞÑ
+            GPIOB_ITModeCfg( (1<<11), GPIO_ITMode_LowLevel ); // ä¸‹é™æ²¿å”¤é†’
         else {
             GPIOB_ITModeCfg( (1<<11), GPIO_ITMode_HighLevel ); //
         }
         PWR_PeriphWakeUpCfg( ENABLE, RB_SLP_USB_WAKE|RB_SLP_GPIO_WAKE, Long_Delay );
         PFIC_EnableIRQ( GPIO_B_IRQn );
-//        LowPower_Sleep( RB_PWR_RAM24K | RB_PWR_RAM2K | RB_PWR_EXTEND | RB_XT_PRE_EN ); //Ö»±£Áô30+2K SRAM ¹©µç
+//        LowPower_Sleep( RB_PWR_RAM24K | RB_PWR_RAM2K | RB_PWR_EXTEND | RB_XT_PRE_EN ); //åªä¿ç•™30+2K SRAM ä¾›ç”µ
 //        LowPower_Shutdown(RB_PWR_RAM2K);
 //        SYS_ResetExecute();
 //        RFIP_WakeUpRegInit();
-        R8_UDEV_CTRL |= RB_UD_PORT_EN;                   // ÔÊĞíUSB¶Ë¿Ú
+        R8_UDEV_CTRL |= RB_UD_PORT_EN;                   // å…è®¸USBç«¯å£
         PWR_PeriphWakeUpCfg( ENABLE, RB_SLP_RTC_WAKE, Long_Delay );
         PFIC_DisableIRQ( GPIO_B_IRQn );
         if( (USB_SleepStatus & HOST_SET_FEATURE) && (USB_SleepStatus & HOST_SET_SUSPEND) )
@@ -248,7 +248,7 @@ uint16_t trans_process_event(uint8_t task_id, uint16_t events)
 ///*********************************************************************
 // * @fn      GPIOB_IRQHandler
 // *
-// * @brief   GPIOBÖĞ¶Ïº¯Êı,ËµÃ÷±»»½ĞÑÁË
+// * @brief   GPIOBä¸­æ–­å‡½æ•°,è¯´æ˜è¢«å”¤é†’äº†
 // *
 // * @return  none
 // */
@@ -258,7 +258,7 @@ uint16_t trans_process_event(uint8_t task_id, uint16_t events)
 //{
 ////    PRINT("Q %x\n",R16_PA_INT_IF);
 //    GPIOB_ClearITFlagBit( 0xFFFF );
-//    // Í£Ö¹Ë¯Ãß
+//    // åœæ­¢ç¡çœ 
 //    R16_PB_INT_EN = 0;
 //}
 

@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.0
  * Date               : 2023/10/25
- * Description        : WCH Qingke V4C FreeRTOS移植汇编接口
+ * Description        : WCH Qingke V4C FreeRTOS绉绘姹囩紪鎺ュ彛
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * SPDX-License-Identifier: Apache-2.0
  *******************************************************************************/
@@ -86,8 +86,8 @@ extern void SysTick_Handler( void );
 /* just for wch's systick, don't have mtime */
 void vPortSetupTimerInterrupt( void )
 {
-    SetVTFIRQ((uint32_t)SW_Handler, SWI_IRQn, 0, ENABLE);                   /* 提升任务切换速度，不从统一入口执行，在处理期间不可中断嵌套 */
-    SetVTFIRQ((uint32_t)SysTick_Handler, SysTick_IRQn, 1, ENABLE);          /* 提升systick中断速度，不从统一入口执行，在处理期间不可中断嵌套 */
+    SetVTFIRQ((uint32_t)SW_Handler, SWI_IRQn, 0, ENABLE);                   /* 鎻愬崌浠诲姟鍒囨崲閫熷害锛屼笉浠庣粺涓�鍏ュ彛鎵ц锛屽湪澶勭悊鏈熼棿涓嶅彲涓柇宓屽 */
+    SetVTFIRQ((uint32_t)SysTick_Handler, SysTick_IRQn, 1, ENABLE);          /* 鎻愬崌systick涓柇閫熷害锛屼笉浠庣粺涓�鍏ュ彛鎵ц锛屽湪澶勭悊鏈熼棿涓嶅彲涓柇宓屽 */
 
     /* set software is lowest priority */
     PFIC_SetPriority(SWI_IRQn, 0xf0);

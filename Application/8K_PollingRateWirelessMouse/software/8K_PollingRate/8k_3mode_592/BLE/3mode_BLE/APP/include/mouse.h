@@ -15,7 +15,7 @@ extern "C"
 #endif
 #include "CH59x_common.h"
 
-// µç³ØµçÁ¿²É¼¯¼ä¸ô
+// ç”µæ± ç”µé‡é‡‡é›†é—´éš”
 #define GET_VBAT_INFO_INTERVAL            1600*5
 
 #define MOUSE_LED_BLINK_EVENT            1<<0
@@ -81,7 +81,7 @@ tmos_stop_task(mouse_taskID, MOUSE_LED_TIMEOUT_EVENT);tmos_stop_task(mouse_taskI
 #define  KEY_BT_ST         GPIOB_ReadPortPin(KEY_BT)
 #define  KEY_2_4G_ST       GPIOB_ReadPortPin(KEY_2_4G)
 
-// »ù±¾Êı¾İ
+// åŸºæœ¬æ•°æ®
 #define CMD_CLASS_KEYBOARD      0x81
 #define CMD_ALL_KEYBOARD        0x82
 #define CMD_CONSUMER            0x83
@@ -107,8 +107,8 @@ tmos_stop_task(mouse_taskID, MOUSE_LED_TIMEOUT_EVENT);tmos_stop_task(mouse_taskI
 extern uint8_t vbat_info;
 
 extern uint8_t work_mode;
-extern volatile uint8_t idel_sleep_flag; // Ò»µµË¯Ãß
-extern volatile uint8_t deep_sleep_flag; // ¶şµµË¯Ãß
+extern volatile uint8_t idel_sleep_flag; // ä¸€æ¡£ç¡çœ 
+extern volatile uint8_t deep_sleep_flag; // äºŒæ¡£ç¡çœ 
 
 extern void RF_ReStart( void );
 extern void access_weakup( void );

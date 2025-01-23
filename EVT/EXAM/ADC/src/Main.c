@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.0
  * Date               : 2021/03/09
- * Description        : adc²ÉÑùÊ¾Àı£¬°üÀ¨ÎÂ¶È¼ì²â¡¢µ¥Í¨µÀ¼ì²â¡¢²î·ÖÍ¨µÀ¼ì²â¡¢TouchKey¼ì²â¡¢ÖĞ¶Ï·½Ê½²ÉÑù¡£
+ * Description        : adcé‡‡æ ·ç¤ºä¾‹ï¼ŒåŒ…æ‹¬æ¸©åº¦æ£€æµ‹ã€å•é€šé“æ£€æµ‹ã€å·®åˆ†é€šé“æ£€æµ‹ã€TouchKeyæ£€æµ‹ã€ä¸­æ–­æ–¹å¼é‡‡æ ·ã€‚
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * Attention: This software (modified or not) and binary are used for 
@@ -18,13 +18,13 @@ volatile uint8_t adclen;
 volatile uint8_t DMA_end = 0;
 
 
-/* ÔÚÓ¦ÓÃÉÏĞèÒª²âÁ¿¸ß¾«¶ÈµÄ¾ø¶ÔÖµÊ±£¬½¨ÒéÊ¹ÓÃ²î·ÖÄ£Ê½£¬ Ò»¶Ë½ÓµØ  */
+/* åœ¨åº”ç”¨ä¸Šéœ€è¦æµ‹é‡é«˜ç²¾åº¦çš„ç»å¯¹å€¼æ—¶ï¼Œå»ºè®®ä½¿ç”¨å·®åˆ†æ¨¡å¼ï¼Œ ä¸€ç«¯æ¥åœ°  */
 
 
 /*********************************************************************
  * @fn      DebugInit
  *
- * @brief   µ÷ÊÔ³õÊ¼»¯
+ * @brief   è°ƒè¯•åˆå§‹åŒ–
  *
  * @return  none
  */
@@ -39,7 +39,7 @@ void DebugInit(void)
 /*********************************************************************
  * @fn      main
  *
- * @brief   Ö÷º¯Êı
+ * @brief   ä¸»å‡½æ•°
  *
  * @return  none
  */
@@ -47,19 +47,19 @@ int main()
 {
 
     uint8_t      i;
-    signed short RoughCalib_Value = 0; // ADC´Öµ÷Æ«²îÖµ
+    signed short RoughCalib_Value = 0; // ADCç²—è°ƒåå·®å€¼
 
     SetSysClock(CLK_SOURCE_PLL_60MHz);
 
-    /* ÅäÖÃ´®¿Úµ÷ÊÔ */
+    /* é…ç½®ä¸²å£è°ƒè¯• */
     DebugInit();
     PRINT("Start @ChipID=%02X\n", R8_CHIP_ID);
-    /* ÎÂ¶È²ÉÑù²¢Êä³ö */
+    /* æ¸©åº¦é‡‡æ ·å¹¶è¾“å‡º */
     PRINT("\n1.Temperature sampling...\n");
     ADC_InterTSSampInit();
     for(i = 0; i < 20; i++)
     {
-        adcBuff[i] = ADC_ExcutSingleConver(); // Á¬Ğø²ÉÑù20´Î
+        adcBuff[i] = ADC_ExcutSingleConver(); // è¿ç»­é‡‡æ ·20æ¬¡
     }
     for(i = 0; i < 20; i++)
     {
@@ -68,31 +68,31 @@ int main()
         PRINT("%d %d %d \n", adc_to_temperature_celsius(adcBuff[i]),adcBuff[i],C25);
     }
 
-    /* µ¥Í¨µÀ²ÉÑù£ºÑ¡ÔñadcÍ¨µÀ0×ö²ÉÑù£¬¶ÔÓ¦ PA4Òı½Å£¬ ´øÊı¾İĞ£×¼¹¦ÄÜ */
+    /* å•é€šé“é‡‡æ ·ï¼šé€‰æ‹©adcé€šé“0åšé‡‡æ ·ï¼Œå¯¹åº” PA4å¼•è„šï¼Œ å¸¦æ•°æ®æ ¡å‡†åŠŸèƒ½ */
     PRINT("\n2.Single channel sampling...\n");
     GPIOA_ModeCfg(GPIO_Pin_4, GPIO_ModeIN_Floating);
     ADC_ExtSingleChSampInit(SampleFreq_3_2, ADC_PGA_0);
 
-    RoughCalib_Value = ADC_DataCalib_Rough(); // ÓÃÓÚ¼ÆËãADCÄÚ²¿Æ«²î£¬¼ÇÂ¼µ½È«¾Ö±äÁ¿ RoughCalib_ValueÖĞ
+    RoughCalib_Value = ADC_DataCalib_Rough(); // ç”¨äºè®¡ç®—ADCå†…éƒ¨åå·®ï¼Œè®°å½•åˆ°å…¨å±€å˜é‡ RoughCalib_Valueä¸­
     PRINT("RoughCalib_Value =%d \n", RoughCalib_Value);
 
     ADC_ChannelCfg(0);
 
     for(i = 0; i < 20; i++)
     {
-        adcBuff[i] = ADC_ExcutSingleConver() + RoughCalib_Value; // Á¬Ğø²ÉÑù20´Î
+        adcBuff[i] = ADC_ExcutSingleConver() + RoughCalib_Value; // è¿ç»­é‡‡æ ·20æ¬¡
     }
     for(i = 0; i < 20; i++)
     {
-        PRINT("%d \n", adcBuff[i]); // ×¢Òâ£ºÓÉÓÚADCÄÚ²¿Æ«²îµÄ´æÔÚ£¬µ±²ÉÑùµçÑ¹ÔÚËùÑ¡ÔöÒæ·¶Î§¼«ÏŞ¸½½üµÄÊ±ºò£¬¿ÉÄÜ»á³öÏÖÊı¾İÒç³öµÄÏÖÏó
+        PRINT("%d \n", adcBuff[i]); // æ³¨æ„ï¼šç”±äºADCå†…éƒ¨åå·®çš„å­˜åœ¨ï¼Œå½“é‡‡æ ·ç”µå‹åœ¨æ‰€é€‰å¢ç›ŠèŒƒå›´æé™é™„è¿‘çš„æ—¶å€™ï¼Œå¯èƒ½ä¼šå‡ºç°æ•°æ®æº¢å‡ºçš„ç°è±¡
     }
 
-    /* DMAµ¥Í¨µÀ²ÉÑù£ºÑ¡ÔñadcÍ¨µÀ0×ö²ÉÑù£¬¶ÔÓ¦ PA4Òı½Å */
+    /* DMAå•é€šé“é‡‡æ ·ï¼šé€‰æ‹©adcé€šé“0åšé‡‡æ ·ï¼Œå¯¹åº” PA4å¼•è„š */
     PRINT("\n3.Single channel DMA sampling...\n");
     GPIOA_ModeCfg(GPIO_Pin_4, GPIO_ModeIN_Floating);
     ADC_ExtSingleChSampInit(SampleFreq_3_2, ADC_PGA_0);
     ADC_ChannelCfg(0);
-    ADC_AutoConverCycle(192); // ²ÉÑùÖÜÆÚÎª (256-192)*16¸öÏµÍ³Ê±ÖÓ
+    ADC_AutoConverCycle(192); // é‡‡æ ·å‘¨æœŸä¸º (256-192)*16ä¸ªç³»ç»Ÿæ—¶é’Ÿ
     ADC_DMACfg(ENABLE, (uint32_t)&adcBuff[0], (uint32_t)&adcBuff[40], ADC_Mode_Single);
     PFIC_EnableIRQ(ADC_IRQn);
     ADC_StartAutoDMA();
@@ -105,21 +105,21 @@ int main()
         PRINT("%d \n", adcBuff[i]);
     }
 
-    /* ²î·ÖÍ¨µÀ²ÉÑù£ºÑ¡ÔñadcÍ¨µÀ0×ö²ÉÑù£¬¶ÔÓ¦ PA4(AIN0)¡¢PA12(AIN2) */
+    /* å·®åˆ†é€šé“é‡‡æ ·ï¼šé€‰æ‹©adcé€šé“0åšé‡‡æ ·ï¼Œå¯¹åº” PA4(AIN0)ã€PA12(AIN2) */
     PRINT("\n4.Diff channel sampling...\n");
     GPIOA_ModeCfg(GPIO_Pin_4 | GPIO_Pin_12, GPIO_ModeIN_Floating);
     ADC_ExtDiffChSampInit(SampleFreq_3_2, ADC_PGA_0);
     ADC_ChannelCfg(0);
     for(i = 0; i < 20; i++)
     {
-        adcBuff[i] = ADC_ExcutSingleConver(); // Á¬Ğø²ÉÑù20´Î
+        adcBuff[i] = ADC_ExcutSingleConver(); // è¿ç»­é‡‡æ ·20æ¬¡
     }
     for(i = 0; i < 20; i++)
     {
         PRINT("%d \n", adcBuff[i]);
     }
 
-    /* TouchKey²ÉÑù£ºÑ¡ÔñadcÍ¨µÀ 2 ×ö²ÉÑù£¬¶ÔÓ¦ PA12 */
+    /* TouchKeyé‡‡æ ·ï¼šé€‰æ‹©adcé€šé“ 2 åšé‡‡æ ·ï¼Œå¯¹åº” PA12 */
     PRINT("\n5.TouchKey sampling...\n");
     GPIOA_ModeCfg(GPIO_Pin_12, GPIO_ModeIN_Floating);
     TouchKey_ChSampInit();
@@ -127,14 +127,14 @@ int main()
 
     for(i = 0; i < 20; i++)
     {
-        adcBuff[i] = TouchKey_ExcutSingleConver(0x10, 0); // Á¬Ğø²ÉÑù20´Î
+        adcBuff[i] = TouchKey_ExcutSingleConver(0x10, 0); // è¿ç»­é‡‡æ ·20æ¬¡
     }
     for(i = 0; i < 20; i++)
     {
         PRINT("%d \n", adcBuff[i]);
     }
 
-    /* µ¥Í¨µÀ²ÉÑù£ºÖĞ¶Ï·½Ê½,Ñ¡ÔñadcÍ¨µÀ1×ö²ÉÑù£¬¶ÔÓ¦ PA5Òı½Å£¬ ²»´øÊı¾İĞ£×¼¹¦ÄÜ */
+    /* å•é€šé“é‡‡æ ·ï¼šä¸­æ–­æ–¹å¼,é€‰æ‹©adcé€šé“1åšé‡‡æ ·ï¼Œå¯¹åº” PA5å¼•è„šï¼Œ ä¸å¸¦æ•°æ®æ ¡å‡†åŠŸèƒ½ */
     PRINT("\n6.Single channel sampling in interrupt mode...\n");
     GPIOA_ModeCfg(GPIO_Pin_5, GPIO_ModeIN_Floating);
     ADC_ExtSingleChSampInit(SampleFreq_3_2, ADC_PGA_0);
@@ -157,13 +157,13 @@ int main()
 /*********************************************************************
  * @fn      ADC_IRQHandler
  *
- * @brief   ADCÖĞ¶Ïº¯Êı
+ * @brief   ADCä¸­æ–­å‡½æ•°
  *
  * @return  none
  */
 __INTERRUPT
 __HIGH_CODE
-void ADC_IRQHandler(void) //adcÖĞ¶Ï·şÎñ³ÌĞò
+void ADC_IRQHandler(void) //adcä¸­æ–­æœåŠ¡ç¨‹åº
 {
     if(ADC_GetDMAStatus())
     {
@@ -178,7 +178,7 @@ void ADC_IRQHandler(void) //adcÖĞ¶Ï·şÎñ³ÌĞò
         if(adclen < 20)
         {
             adcBuff[adclen] = ADC_ReadConverValue();
-            ADC_StartUp(); // ×÷ÓÃÇå³ıÖĞ¶Ï±êÖ¾²¢¿ªÆôĞÂÒ»ÂÖ²ÉÑù
+            ADC_StartUp(); // ä½œç”¨æ¸…é™¤ä¸­æ–­æ ‡å¿—å¹¶å¼€å¯æ–°ä¸€è½®é‡‡æ ·
         }
         adclen++;
     }

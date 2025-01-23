@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.2
  * Date               : 2022/01/18
- * Description        : Ó²¼şÈÎÎñ´¦Àíº¯Êı¼°BLEºÍÓ²¼ş³õÊ¼»¯
+ * Description        : ç¡¬ä»¶ä»»åŠ¡å¤„ç†å‡½æ•°åŠBLEå’Œç¡¬ä»¶åˆå§‹åŒ–
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * Attention: This software (modified or not) and binary are used for 
@@ -11,7 +11,7 @@
  *******************************************************************************/
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include "HAL.h"
 #include "access.h"
 #include "nvs_flash.h"
@@ -23,7 +23,7 @@ uint32_t gTxCount;
 /*******************************************************************************
  * @fn      Lib_Calibration_LSI
  *
- * @brief   ÄÚ²¿32kĞ£×¼
+ * @brief   å†…éƒ¨32kæ ¡å‡†
  *
  * @param   None.
  *
@@ -76,7 +76,7 @@ extern bleConfig_t  ble;
 /*******************************************************************************
  * @fn      CH57X_BLEInit
  *
- * @brief   BLE ¿â³õÊ¼»¯
+ * @brief   BLE åº“åˆå§‹åŒ–
  *
  * @param   None.
  *
@@ -114,13 +114,13 @@ void CH59X_BLEInit(uint32_t snv_addr)
     cfg.ConnectNumber = (PERIPHERAL_MAX_CONNECTION & 3) | (CENTRAL_MAX_CONNECTION << 2);
     cfg.srandCB = SYS_GetSysTickCnt;
 #if(defined TEM_SAMPLE) && (TEM_SAMPLE == TRUE)
-    cfg.tsCB = HAL_GetInterTempValue; // ¸ù¾İÎÂ¶È±ä»¯Ğ£×¼RFºÍÄÚ²¿RC( ´óÓÚ7ÉãÊÏ¶È )
+    cfg.tsCB = HAL_GetInterTempValue; // æ ¹æ®æ¸©åº¦å˜åŒ–æ ¡å‡†RFå’Œå†…éƒ¨RC( å¤§äº7æ‘„æ°åº¦ )
   #if(CLK_OSC32K)
-    cfg.rcCB = Lib_Calibration_LSI; // ÄÚ²¿32KÊ±ÖÓĞ£×¼
+    cfg.rcCB = Lib_Calibration_LSI; // å†…éƒ¨32Kæ—¶é’Ÿæ ¡å‡†
   #endif
 #endif
 #if(defined(HAL_SLEEP)) && (HAL_SLEEP == TRUE)
-    cfg.idleCB = CH59x_LowPower; // ÆôÓÃË¯Ãß
+    cfg.idleCB = CH59x_LowPower; // å¯ç”¨ç¡çœ 
 #endif
 #if(defined(BLE_MAC)) && (BLE_MAC == TRUE)
     for(i = 0; i < 6; i++)
@@ -133,7 +133,7 @@ void CH59X_BLEInit(uint32_t snv_addr)
         GetMACAddress(MacAddr);
         for(i = 0; i < 6; i++)
         {
-            cfg.MacAddr[i] = MacAddr[i]; // Ê¹ÓÃĞ¾Æ¬macµØÖ·
+            cfg.MacAddr[i] = MacAddr[i]; // ä½¿ç”¨èŠ¯ç‰‡macåœ°å€
         }
     }
 #endif
@@ -152,7 +152,7 @@ void CH59X_BLEInit(uint32_t snv_addr)
 /*******************************************************************************
  * @fn      HAL_ProcessEvent
  *
- * @brief   Ó²¼ş²ãÊÂÎñ´¦Àí
+ * @brief   ç¡¬ä»¶å±‚äº‹åŠ¡å¤„ç†
  *
  * @param   task_id - The TMOS assigned task ID.
  * @param   events  - events to process.  This is a bit map and can
@@ -165,7 +165,7 @@ tmosEvents HAL_ProcessEvent(tmosTaskID task_id, tmosEvents events)
     uint8_t *msgPtr;
 
     if(events & SYS_EVENT_MSG)
-    { // ´¦ÀíHAL²ãÏûÏ¢£¬µ÷ÓÃtmos_msg_receive¶ÁÈ¡ÏûÏ¢£¬´¦ÀíÍê³ÉºóÉ¾³ıÏûÏ¢¡£
+    { // å¤„ç†HALå±‚æ¶ˆæ¯ï¼Œè°ƒç”¨tmos_msg_receiveè¯»å–æ¶ˆæ¯ï¼Œå¤„ç†å®Œæˆååˆ é™¤æ¶ˆæ¯ã€‚
         msgPtr = tmos_msg_receive(task_id);
         if(msgPtr)
         {
@@ -191,11 +191,11 @@ tmosEvents HAL_ProcessEvent(tmosTaskID task_id, tmosEvents events)
     }
     if(events & HAL_REG_INIT_EVENT)
     {
-#if(defined BLE_CALIBRATION_ENABLE) && (BLE_CALIBRATION_ENABLE == TRUE) // Ğ£×¼ÈÎÎñ£¬µ¥´ÎĞ£×¼ºÄÊ±Ğ¡ÓÚ10ms
+#if(defined BLE_CALIBRATION_ENABLE) && (BLE_CALIBRATION_ENABLE == TRUE) // æ ¡å‡†ä»»åŠ¡ï¼Œå•æ¬¡æ ¡å‡†è€—æ—¶å°äº10ms
         PRINT("br s\n");
         if(access_state.idel_sleep_flag)
         {
-            //  ´ò¿ª´®¿ÚÖĞ¶Ï
+            //  æ‰“å¼€ä¸²å£ä¸­æ–­
 //            access_state.sleep_en = FALSE;
             PFIC_EnableIRQ( UART1_IRQn );
 
@@ -203,14 +203,14 @@ tmosEvents HAL_ProcessEvent(tmosTaskID task_id, tmosEvents events)
 //            tmos_start_task(halTaskID, HAL_REG_INIT_EVENT, 3);
 //            return events ^ HAL_REG_INIT_EVENT;
         }
-        BLE_RegInit();                                                  // Ğ£×¼RF
+        BLE_RegInit();                                                  // æ ¡å‡†RF
         PRINT("br e\n");
   #if(CLK_OSC32K)
-        Lib_Calibration_LSI(); // Ğ£×¼ÄÚ²¿RC
+        Lib_Calibration_LSI(); // æ ¡å‡†å†…éƒ¨RC
   #endif
 //        if(access_state.idel_sleep_flag)
 //        {
-//            // ÖØĞÂ´ò¿ªË¯Ãß
+//            // é‡æ–°æ‰“å¼€ç¡çœ 
 //            access_state.sleep_en = TRUE;
 //        }
 //        if(!access_state.deep_sleep_flag)
@@ -240,7 +240,7 @@ tmosEvents HAL_ProcessEvent(tmosTaskID task_id, tmosEvents events)
 /*******************************************************************************
  * @fn      HAL_Init
  *
- * @brief   Ó²¼ş³õÊ¼»¯
+ * @brief   ç¡¬ä»¶åˆå§‹åŒ–
  *
  * @param   None.
  *
@@ -260,17 +260,17 @@ void HAL_Init()
     HAL_KeyInit();
 #endif
 #if(defined BLE_CALIBRATION_ENABLE) && (BLE_CALIBRATION_ENABLE == TRUE)
-    tmos_start_task(halTaskID, HAL_REG_INIT_EVENT, MS1_TO_SYSTEM_TIME(BLE_CALIBRATION_PERIOD)); // Ìí¼ÓĞ£×¼ÈÎÎñ£¬µ¥´ÎĞ£×¼ºÄÊ±Ğ¡ÓÚ10ms
+    tmos_start_task(halTaskID, HAL_REG_INIT_EVENT, MS1_TO_SYSTEM_TIME(BLE_CALIBRATION_PERIOD)); // æ·»åŠ æ ¡å‡†ä»»åŠ¡ï¼Œå•æ¬¡æ ¡å‡†è€—æ—¶å°äº10ms
 #endif
-//    tmos_start_task( halTaskID, HAL_TEST_EVENT, 1600 );    // Ìí¼ÓÒ»¸ö²âÊÔÈÎÎñ
+//    tmos_start_task( halTaskID, HAL_TEST_EVENT, 1600 );    // æ·»åŠ ä¸€ä¸ªæµ‹è¯•ä»»åŠ¡
 }
 
 /*******************************************************************************
  * @fn      HAL_GetInterTempValue
  *
- * @brief   »ñÈ¡ÄÚ²¿ÎÂ¸Ğ²ÉÑùÖµ£¬Èç¹ûÊ¹ÓÃÁËADCÖĞ¶Ï²ÉÑù£¬ĞèÔÚ´Ëº¯ÊıÖĞÔİÊ±ÆÁ±ÎÖĞ¶Ï.
+ * @brief   è·å–å†…éƒ¨æ¸©æ„Ÿé‡‡æ ·å€¼ï¼Œå¦‚æœä½¿ç”¨äº†ADCä¸­æ–­é‡‡æ ·ï¼Œéœ€åœ¨æ­¤å‡½æ•°ä¸­æš‚æ—¶å±è”½ä¸­æ–­.
  *
- * @return  ÄÚ²¿ÎÂ¸Ğ²ÉÑùÖµ.
+ * @return  å†…éƒ¨æ¸©æ„Ÿé‡‡æ ·å€¼.
  */
 uint16_t HAL_GetInterTempValue(void)
 {

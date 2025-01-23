@@ -9,7 +9,7 @@
  *******************************************************************************/
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include <RF.h>
 #include <SLEEP.h>
 #include "wchrf.h"
@@ -31,9 +31,9 @@
 /*******************************************************************************
  * @fn          RF_LowPower
  *
- * @brief       Æô¶¯Ë¯Ãß
+ * @brief       å¯åŠ¨ç¡çœ 
  *
- * @param       time  -  Ë¯ÃßµÄÊ±¼ä
+ * @param       time  -  ç¡çœ çš„æ—¶é—´
  *
  * @return      none.
  */
@@ -44,7 +44,7 @@ void RF_LowPower(uint32_t time)
     unsigned long irq_status;
 
     sys_safe_access_enable();
-    R8_RTC_MODE_CTRL &= ~RB_RTC_TRIG_EN;  // ´¥·¢Ä£Ê½
+    R8_RTC_MODE_CTRL &= ~RB_RTC_TRIG_EN;  // è§¦å‘æ¨¡å¼
     sys_safe_access_disable();              //
     SYS_DisableAllIrq(&irq_status);
 
@@ -61,19 +61,19 @@ void RF_LowPower(uint32_t time)
     gSleepFlag = TRUE;
     SYS_RecoverIrq(irq_status);
     sys_safe_access_enable();
-    R8_RTC_MODE_CTRL |= RB_RTC_TRIG_EN;  // ´¥·¢Ä£Ê½
+    R8_RTC_MODE_CTRL |= RB_RTC_TRIG_EN;  // è§¦å‘æ¨¡å¼
     sys_safe_access_disable();              //
 
-    // LOW POWER-SLEEPÄ£Ê½
-    LowPower_Sleep( RB_PWR_RAM24K | RB_PWR_RAM2K | RB_PWR_EXTEND ); //Ö»±£Áô24+2K SRAM ¹©µç
-    HSECFG_Current(HSE_RCur_100); // ½µÎª¶î¶¨µçÁ÷(µÍ¹¦ºÄº¯ÊıÖĞÌáÉıÁËHSEÆ«ÖÃµçÁ÷)
+    // LOW POWER-SLEEPæ¨¡å¼
+    LowPower_Sleep( RB_PWR_RAM24K | RB_PWR_RAM2K | RB_PWR_EXTEND ); //åªä¿ç•™24+2K SRAM ä¾›ç”µ
+    HSECFG_Current(HSE_RCur_100); // é™ä¸ºé¢å®šç”µæµ(ä½åŠŸè€—å‡½æ•°ä¸­æå‡äº†HSEåç½®ç”µæµ)
 #endif
 }
 
 /*******************************************************************************
  * @fn      RF_SleepInit
  *
- * @brief   ÅäÖÃË¯Ãß»½ĞÑµÄ·½Ê½   - RTC»½ĞÑ£¬´¥·¢Ä£Ê½
+ * @brief   é…ç½®ç¡çœ å”¤é†’çš„æ–¹å¼   - RTCå”¤é†’ï¼Œè§¦å‘æ¨¡å¼
  *
  * @param   None.
  *
@@ -83,10 +83,10 @@ void RF_SleepInit(void)
 {
 #if(defined(HAL_SLEEP)) && (HAL_SLEEP == TRUE)
     sys_safe_access_enable();
-    R8_SLP_WAKE_CTRL |= RB_SLP_RTC_WAKE; // RTC»½ĞÑ
+    R8_SLP_WAKE_CTRL |= RB_SLP_RTC_WAKE; // RTCå”¤é†’
     sys_safe_access_disable();              //
 //    sys_safe_access_enable();
-//    R8_RTC_MODE_CTRL |= RB_RTC_TRIG_EN;  // ´¥·¢Ä£Ê½
+//    R8_RTC_MODE_CTRL |= RB_RTC_TRIG_EN;  // è§¦å‘æ¨¡å¼
 //    sys_safe_access_disable();              //
 //    PFIC_EnableIRQ(RTC_IRQn);
 #endif

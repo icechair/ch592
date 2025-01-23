@@ -185,9 +185,9 @@ void write_file( uint8_t *pData )
 #if FUN_FILE_CREATE
     uint8_t s;
 
-    mCmdParam.Write.mSectorCount = 1;       //Ğ´ÈëËùÓĞÉÈÇøµÄÊı¾İ
-    mCmdParam.Write.mDataBuffer = pData;    //Ö¸ÏòÎÄ¼şÊı¾İ»º³åÇøµÄÆğÊ¼µØÖ·
-    s = CHRV3FileWrite( );                  //ÏòÎÄ¼şĞ´ÈëÊı¾İ
+    mCmdParam.Write.mSectorCount = 1;       //å†™å…¥æ‰€æœ‰æ‰‡åŒºçš„æ•°æ®
+    mCmdParam.Write.mDataBuffer = pData;    //æŒ‡å‘æ–‡ä»¶æ•°æ®ç¼“å†²åŒºçš„èµ·å§‹åœ°å€
+    s = CHRV3FileWrite( );                  //å‘æ–‡ä»¶å†™å…¥æ•°æ®
     mStopIfError( s );
 #endif
 }

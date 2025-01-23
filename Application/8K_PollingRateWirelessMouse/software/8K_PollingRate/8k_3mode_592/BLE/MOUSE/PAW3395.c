@@ -10,7 +10,7 @@
  *******************************************************************************/
 
 /******************************************************************************/
-/* Í·ÎÄ¼þ°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include "peripheral.h"
 
 /*********************************************************************
@@ -59,7 +59,7 @@ __HIGH_CODE
 uint8_t spi_read_byte(void)
 {
     R8_SPI0_CTRL_MOD |= RB_SPI_FIFO_DIR;
-    R8_SPI0_BUFFER = 0xFF; // Æô¶¯´«Êä
+    R8_SPI0_BUFFER = 0xFF; // å¯åŠ¨ä¼ è¾“
     while(!(R8_SPI0_INT_FLAG & RB_SPI_FREE));
     return (R8_SPI0_BUFFER);
 }
@@ -81,8 +81,8 @@ void spi_init(void)
 //    R8_SPI0_CLOCK_DIV = 250;
     R8_SPI0_CTRL_MOD = RB_SPI_ALL_CLEAR;
     R8_SPI0_CTRL_MOD = RB_SPI_MOSI_OE | RB_SPI_SCK_OE;
-    R8_SPI0_CTRL_CFG |= RB_SPI_AUTO_IF;     // ·ÃÎÊBUFFER/FIFO×Ô¶¯Çå³ýIF_BYTE_END±êÖ¾
-    R8_SPI0_CTRL_CFG &= ~RB_SPI_DMA_ENABLE; // ²»Æô¶¯DMA·½Ê½
+    R8_SPI0_CTRL_CFG |= RB_SPI_AUTO_IF;     // è®¿é—®BUFFER/FIFOè‡ªåŠ¨æ¸…é™¤IF_BYTE_ENDæ ‡å¿—
+    R8_SPI0_CTRL_CFG &= ~RB_SPI_DMA_ENABLE; // ä¸å¯åŠ¨DMAæ–¹å¼
 
     SPI0_DataMode(Mode3_HighBitINFront);
 }

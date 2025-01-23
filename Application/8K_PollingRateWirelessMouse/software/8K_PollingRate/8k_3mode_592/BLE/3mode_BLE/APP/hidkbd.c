@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.0
  * Date               : 2018/12/10
- * Description        : À¶ÑÀ¼üÅÌÓ¦ÓÃ³ÌĞò£¬³õÊ¼»¯¹ã²¥Á¬½Ó²ÎÊı£¬È»ºó¹ã²¥£¬Ö±ÖÁÁ¬½ÓÖ÷»úºó£¬¶¨Ê±ÉÏ´«¼üÖµ
+ * Description        : è“ç‰™é”®ç›˜åº”ç”¨ç¨‹åºï¼Œåˆå§‹åŒ–å¹¿æ’­è¿æ¥å‚æ•°ï¼Œç„¶åå¹¿æ’­ï¼Œç›´è‡³è¿æ¥ä¸»æœºåï¼Œå®šæ—¶ä¸Šä¼ é”®å€¼
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * Attention: This software (modified or not) and binary are used for 
@@ -149,7 +149,7 @@ uint16_t hidEmuConnHandle = GAP_CONNHANDLE_INIT;
 
 access_ble_idx_t con_work_mode = BLE_INDEX_IDEL;
 
-#define BLE_SEND_BUF_LEN      20   //  »º´æ5¸ö°ü
+#define BLE_SEND_BUF_LEN      20   //  ç¼“å­˜5ä¸ªåŒ…
 
 typedef struct
 {
@@ -221,7 +221,7 @@ void HidEmu_Init()
         // Set the GAP Role Parameters
         GAPRole_SetParameter(GAPROLE_ADVERT_ENABLED, sizeof(uint8_t), &initial_advertising_enable);
 
-        // ´Óflash»Ø¸´Éè±¸Ãû³Æ
+        // ä»flashå›å¤è®¾å¤‡åç§°
         scanRspData[0] = nvs_flash_info.ble_name_len+1;
         scanRspData[1] = GAP_ADTYPE_LOCAL_NAME_COMPLETE;
         tmos_memcpy(&scanRspData[2], nvs_flash_info.ble_name_data, nvs_flash_info.ble_name_len);
@@ -350,7 +350,7 @@ uint16_t HidEmu_ProcessEvent(uint8_t task_id, uint16_t events)
         {
             access_tran_report(REPORT_CMD_STATE, STATE_CON_TERMINATE);
             last_led_data = 0xFF;
-            // Çå¿Õbuff
+            // æ¸…ç©ºbuff
             BLE_buf_out_idx=0;
             BLE_buf_data_num=0;
             BLE_buf_resend_num=0;
@@ -412,7 +412,7 @@ uint16_t HidEmu_ProcessEvent(uint8_t task_id, uint16_t events)
 //                            (temp2==(BLE_SEND_BUF_LEN-1))?(temp2=0):(temp2++);
 //                            temp1--;
 //                        }
-//                        // Çå¿Õbuff
+//                        // æ¸…ç©ºbuff
 //                        BLE_buf_out_idx=0;
 //                        BLE_buf_data_num=0;
 //                        BLE_buf_resend_num=0;
@@ -476,7 +476,7 @@ uint16_t HidEmu_ProcessEvent(uint8_t task_id, uint16_t events)
         GAPRole_GetParameter(GAPROLE_STATE, &ble_state);
         if(ble_state != GAPROLE_CONNECTED)
         {
-            // Çå¿Õbuff
+            // æ¸…ç©ºbuff
             BLE_buf_out_idx=0;
             BLE_buf_data_num=0;
             BLE_buf_resend_num=0;
@@ -506,7 +506,7 @@ static void hidEmu_ProcessTMOSMsg(tmos_event_hdr_t *pMsg)
 /*********************************************************************
  * @fn      hidEmu_disconnect
  *
- * @brief   Ç¿ÖÆ¶Ï¿ªÁ¬½Ó
+ * @brief   å¼ºåˆ¶æ–­å¼€è¿æ¥
  *
  * @return  none.
  */
@@ -526,7 +526,7 @@ void hidEmu_disconnect()
 /*********************************************************************
  * @fn      hidEmu_delete_ble_bonded
  *
- * @brief   Çå³şµ±Ç°Ä£Ê½µÄÉè±¸µÄ°ó¶¨±êÖ¾£¬´æ´¢Ïà¹Ø°ó¶¨±êÖ¾ĞÅÏ¢µ½flash
+ * @brief   æ¸…æ¥šå½“å‰æ¨¡å¼çš„è®¾å¤‡çš„ç»‘å®šæ ‡å¿—ï¼Œå­˜å‚¨ç›¸å…³ç»‘å®šæ ‡å¿—ä¿¡æ¯åˆ°flash
  *
  * @return  none.
  */
@@ -560,7 +560,7 @@ void hidEmu_delete_ble_bonded()
 /*********************************************************************
  * @fn      hidEmu_save_ble_bonded
  *
- * @brief   ´æ´¢Ïà¹Ø°ó¶¨±êÖ¾ĞÅÏ¢µ½flash£¬×Ô¶¯µ÷ÓÃ´Ëº¯Êı£¬µ÷ÓÃÇ°ÒÑ¾­½«°ó¶¨ĞÅÏ¢´æµ½flashÖĞ
+ * @brief   å­˜å‚¨ç›¸å…³ç»‘å®šæ ‡å¿—ä¿¡æ¯åˆ°flashï¼Œè‡ªåŠ¨è°ƒç”¨æ­¤å‡½æ•°ï¼Œè°ƒç”¨å‰å·²ç»å°†ç»‘å®šä¿¡æ¯å­˜åˆ°flashä¸­
  *
  * @return  none.
  */
@@ -614,7 +614,7 @@ void hidEmu_save_ble_bonded(uint8_t is_pairing)
 /*********************************************************************
  * @fn      hidEmu_is_ble_mac_change
  *
- * @brief   ÅĞ¶ÏmacµØÖ·ÊÇ·ñĞèÒª+1
+ * @brief   åˆ¤æ–­macåœ°å€æ˜¯å¦éœ€è¦+1
  *
  * @return  none.
  */
@@ -647,7 +647,7 @@ uint8_t hidEmu_is_ble_mac_change( access_ble_idx_t ble_idx )
 /*********************************************************************
  * @fn      hidEmu_is_ble_bonded
  *
- * @brief   ÅĞ¶ÏÊÇ·ñ°ó¶¨
+ * @brief   åˆ¤æ–­æ˜¯å¦ç»‘å®š
  *
  * @return  none.
  */
@@ -681,7 +681,7 @@ uint8_t hidEmu_is_ble_bonded( access_ble_idx_t ble_idx )
 /*********************************************************************
  * @fn      hidEmu_adv_enable
  *
- * @brief   ´ò¿ª¹ã²¥£¬²¢¸ù¾İÊÇ·ñ°ó¶¨Ñ¡Ôñ¿ªÊ¼¹ıÂËµÄ¹ã²¥£¬¸ü»»¹ã²¥Ãû³Æ.
+ * @brief   æ‰“å¼€å¹¿æ’­ï¼Œå¹¶æ ¹æ®æ˜¯å¦ç»‘å®šé€‰æ‹©å¼€å§‹è¿‡æ»¤çš„å¹¿æ’­ï¼Œæ›´æ¢å¹¿æ’­åç§°.
  *
  * @return  none.
  */
@@ -708,14 +708,14 @@ void hidEmu_adv_enable(uint8_t enable)
         GAPBondMgr_SetParameter( GAPBOND_AUTO_SYNC_RL, sizeof(uint8_t), &RL_enable );
 
         GAPRole_GetParameter(GAPROLE_BD_ADDR, ownAddr);
-        // ĞŞ¸Ä¹ã²¥µØÖ·¡£
+        // ä¿®æ”¹å¹¿æ’­åœ°å€ã€‚
         tmos_snv_read(BLE_NVID_IRK,KEYLEN,IRK);
         PRINT("IRK %x %x %x %x %x %x\n",IRK[5],IRK[4],IRK[3],IRK[2],IRK[1],IRK[0]);
         GAPRole_SetParameter(GAPROLE_IRK, KEYLEN, IRK);
         ownAddr[4] += access_state.ble_idx;
         if( access_state.pairing_state )
         {
-            // Èç¹û¸ü»»±êÖ¾Î´ÖÃÎ»£¬Ôò¸ü»»
+            // å¦‚æœæ›´æ¢æ ‡å¿—æœªç½®ä½ï¼Œåˆ™æ›´æ¢
             if(!hidEmu_is_ble_mac_change(access_state.ble_idx))
             {
                 ownAddr[3] += access_state.ble_idx;
@@ -723,7 +723,7 @@ void hidEmu_adv_enable(uint8_t enable)
         }
         else
         {
-            // Èç¹û¸ü»»±êÖ¾ÒÑÖÃÎ»£¬Ôò¸ü»»
+            // å¦‚æœæ›´æ¢æ ‡å¿—å·²ç½®ä½ï¼Œåˆ™æ›´æ¢
             if(hidEmu_is_ble_mac_change(access_state.ble_idx))
             {
                 ownAddr[3] += access_state.ble_idx;
@@ -732,7 +732,7 @@ void hidEmu_adv_enable(uint8_t enable)
         PRINT("%x %x %x %x %x %x\n",ownAddr[5],ownAddr[4],ownAddr[3],ownAddr[2],ownAddr[1],ownAddr[0]);
         GAP_ConfigDeviceAddr(ADDRTYPE_STATIC, ownAddr);
 
-        // ÓĞĞèÇóÊÇ²»Í¬Í¨µÀÀ¶ÑÀÃû×Ö²»Ò»Ñù±ÈÈçÍ¨µÀ1Ãû³ÆÎª¡°BT-1¡±£¬Í¨µÀ2Ãû³ÆÎª¡°BT-2¡±µÈ£¬ÔòMCU·¢ËÍÊÇ¡°BT-$¡±,Õâ¸öÃÀÔª·ûºÅ±íÊ¾À¶ÑÀ²»Í¬Í¨µÀÏÔÊ¾²»Í¬µÄÃû³Æ
+        // æœ‰éœ€æ±‚æ˜¯ä¸åŒé€šé“è“ç‰™åå­—ä¸ä¸€æ ·æ¯”å¦‚é€šé“1åç§°ä¸ºâ€œBT-1â€ï¼Œé€šé“2åç§°ä¸ºâ€œBT-2â€ç­‰ï¼Œåˆ™MCUå‘é€æ˜¯â€œBT-$â€,è¿™ä¸ªç¾å…ƒç¬¦å·è¡¨ç¤ºè“ç‰™ä¸åŒé€šé“æ˜¾ç¤ºä¸åŒçš„åç§°
         for(i=0; i<nvs_flash_info.ble_name_len; i++ )
         {
             if(nvs_flash_info.ble_name_data[i]=='$')
@@ -951,7 +951,7 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
             LL_SetDataRelatedAddressChanges( 1, 1 ) ;
             if(access_taskId != INVALID_TASK_ID)
             {
-                // ³õÊ¼»¯Íê³Éºó£¬¼ì²éÊÇ·ñĞèÒªÖ±½ÓÇĞ»»µ½¶ÔÓ¦Á¬½Ó
+                // åˆå§‹åŒ–å®Œæˆåï¼Œæ£€æŸ¥æ˜¯å¦éœ€è¦ç›´æ¥åˆ‡æ¢åˆ°å¯¹åº”è¿æ¥
                 if(nvs_flash_info.ble_idx != access_state.ble_idx)
                 {
                     access_ctl_process( nvs_flash_info.ble_idx + CTL_MODE_BLE_1 - BLE_INDEX_1);
@@ -965,11 +965,11 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
             if(pEvent->gap.opcode == GAP_MAKE_DISCOVERABLE_DONE_EVENT)
             {
                 adv_enable_process_flag = FALSE;
-                // ¼ÇÏÂµ±Ç°Ä£Ê½
+                // è®°ä¸‹å½“å‰æ¨¡å¼
                 if((access_state.ble_idx<BLE_INDEX_1) || (access_state.ble_idx>BLE_INDEX_5))
                 {
                     PRINT("ADV mode err.. %x\n",access_state.ble_idx);
-                    // ×´Ì¬´íÎó£¬¹Ø±Õ¹ã²¥
+                    // çŠ¶æ€é”™è¯¯ï¼Œå…³é—­å¹¿æ’­
                     hidEmu_adv_enable(DISABLE);
                 }
                 else
@@ -1001,7 +1001,7 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                   PRINT("buf_num %d\n",BLE_buf_data_num);
                 }
                 else {
-                  // Çå¿Õbuff
+                  // æ¸…ç©ºbuff
                   BLE_buf_out_idx=0;
                   BLE_buf_data_num=0;
                   BLE_buf_resend_num=0;
@@ -1016,7 +1016,7 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
 //                        time -= 0xA8C00000;
 //                    }
 //                    RTC_SetTignTime(time);
-//                    // LOW POWER-sleepÄ£Ê½
+//                    // LOW POWER-sleepæ¨¡å¼
 //                    if((!RTCTigFlag)&&(GPIOB_ReadPortPin(bRXD1_)))
 //                    {
 //                        LowPower_Sleep(RB_PWR_RAM2K | RB_PWR_RAM30K | RB_PWR_EXTEND);
@@ -1025,7 +1025,7 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
 //                        mDelaymS(1);
 //                        BLE_RegInit();
 //                        GPIOA_SetBits(bTXD0_);
-//                        HSECFG_Current(HSE_RCur_100); // ½µÎª¶î¶¨µçÁ÷(µÍ¹¦ºÄº¯ÊıÖĞÌáÉıÁËHSEÆ«ÖÃµçÁ÷)
+//                        HSECFG_Current(HSE_RCur_100); // é™ä¸ºé¢å®šç”µæµ(ä½åŠŸè€—å‡½æ•°ä¸­æå‡äº†HSEåç½®ç”µæµ)
 //                    }
 //                }
 //                access_update_idel_sleep_timeout(0);
@@ -1042,9 +1042,9 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
         case GAPROLE_WAITING:
             if(pEvent->gap.opcode == GAP_END_DISCOVERABLE_DONE_EVENT)
             {
-                // 1¡¢ÇĞ»»µ½ÆäËûÄ£Ê½£¬ÃüÁîÍ£Ö¹µÄ¹ã²¥£¬ÔòÅĞ¶ÏÄ£Ê½£¬²»¿ªÆôĞÂµÄ¹ã²¥
-                // 2¡¢»¹ÊÇµ±Ç°Ä£Ê½Ã»±ä£¬Ö»ÊÇlimit¹ã²¥×Ô¶¯Í£Ö¹£¬Ôò¼ÌĞø¹ã²¥(×¢ÒâÊÇ·ñÊÇOTAÄ£Ê½)
-                // 3¡¢ÇĞ»»µ½ÁíÍâµÄÀ¶ÑÀÄ£Ê½£¬ÃüÁîÍ£Ö¹µÄ¹ã²¥£¬ÔòĞŞ¸ÄmacµØÖ·£¬ÅĞ¶ÏÊÇ·ñÒÑ¾­°ó¶¨¹ı£¬ÊÇÔò¿ªÆô¹ã²¥£¬²¢¿ªÆô¹ıÂË£¬·ñÔò²»¿ªÆô¹ã²¥£¬µÈ´ıÅä¶ÔÃüÁî¡£
+                // 1ã€åˆ‡æ¢åˆ°å…¶ä»–æ¨¡å¼ï¼Œå‘½ä»¤åœæ­¢çš„å¹¿æ’­ï¼Œåˆ™åˆ¤æ–­æ¨¡å¼ï¼Œä¸å¼€å¯æ–°çš„å¹¿æ’­
+                // 2ã€è¿˜æ˜¯å½“å‰æ¨¡å¼æ²¡å˜ï¼Œåªæ˜¯limitå¹¿æ’­è‡ªåŠ¨åœæ­¢ï¼Œåˆ™ç»§ç»­å¹¿æ’­(æ³¨æ„æ˜¯å¦æ˜¯OTAæ¨¡å¼)
+                // 3ã€åˆ‡æ¢åˆ°å¦å¤–çš„è“ç‰™æ¨¡å¼ï¼Œå‘½ä»¤åœæ­¢çš„å¹¿æ’­ï¼Œåˆ™ä¿®æ”¹macåœ°å€ï¼Œåˆ¤æ–­æ˜¯å¦å·²ç»ç»‘å®šè¿‡ï¼Œæ˜¯åˆ™å¼€å¯å¹¿æ’­ï¼Œå¹¶å¼€å¯è¿‡æ»¤ï¼Œå¦åˆ™ä¸å¼€å¯å¹¿æ’­ï¼Œç­‰å¾…é…å¯¹å‘½ä»¤ã€‚
                 PRINT("con_mode %x\n",con_work_mode);
                 if((con_work_mode == access_state.ble_idx))
                 {
@@ -1055,7 +1055,7 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                     }
                     else
                     {
-                        // limit¹ã²¥×Ô¶¯Í£Ö¹£¬ÖØĞÂ´ò¿ª¼´¿É
+                        // limitå¹¿æ’­è‡ªåŠ¨åœæ­¢ï¼Œé‡æ–°æ‰“å¼€å³å¯
                         hidEmu_adv_enable(ENABLE);
                     }
                 }
@@ -1069,18 +1069,18 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                         }
                         else
                         {
-                            // ½øÈëĞÂÀ¶ÑÀÄ£Ê½µÄ»ØÁ¬×´Ì¬
+                            // è¿›å…¥æ–°è“ç‰™æ¨¡å¼çš„å›è¿çŠ¶æ€
                             access_tran_report(REPORT_CMD_STATE, STATE_RE_CONNECTING);
                         }
                         hidEmu_adv_enable(ENABLE);
                     }
                     else {
-                        // Ã»°ó¶¨¹ı£¬ÎŞ·¨»ØÁ¬
+                        // æ²¡ç»‘å®šè¿‡ï¼Œæ— æ³•å›è¿
                         con_work_mode = access_state.ble_idx;
                         access_tran_report(REPORT_CMD_STATE, STATE_RE_CONNECT_FAIL);
                     }
                 }
-//                // ¼ÇÏÂµ±Ç°Ä£Ê½ Ë¯ÃßºóÄ£Ê½¸ÄÎªidel£¬ËùÒÔÕâÀï²»ÄÜÍ¬²½Ä£Ê½
+//                // è®°ä¸‹å½“å‰æ¨¡å¼ ç¡çœ åæ¨¡å¼æ”¹ä¸ºidelï¼Œæ‰€ä»¥è¿™é‡Œä¸èƒ½åŒæ­¥æ¨¡å¼
 //                con_work_mode = access_state.ble_idx;
                 PRINT("Waiting for advertising..\n");
             }
@@ -1090,15 +1090,15 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                 {
                     tmos_stop_task(hidEmuTaskId, WAIT_TERMINATE_EVT);
                 }
-//                // ÉÏ±¨À¶ÑÀ¶Ï¿ª
-//                // Èç¹ûµ±Ç°ÒÑ¾­ÊÇ2.4GÄ£Ê½µÄ»°£¬ËµÃ÷ÒÑ¾­·¢¹ıµÄ¶Ï¿ª£¬²»ÔÙ·¢¡£
+//                // ä¸ŠæŠ¥è“ç‰™æ–­å¼€
+//                // å¦‚æœå½“å‰å·²ç»æ˜¯2.4Gæ¨¡å¼çš„è¯ï¼Œè¯´æ˜å·²ç»å‘è¿‡çš„æ–­å¼€ï¼Œä¸å†å‘ã€‚
 //                if( access_state.ble_idx != WORK_MODE_2_4G)
 //                {
 //                    access_tran_report(REPORT_CMD_STATE, STATE_CON_TERMINATE);
 //                }
-                // 1¡¢ÇĞ»»µ½ÆäËûÄ£Ê½£¬ÃüÁîÍ£Ö¹µÄÁ¬½Ó£¬ÔòÅĞ¶ÏÄ£Ê½£¬²»¿ªÆôĞÂµÄ¹ã²¥
-                // 2¡¢»¹ÊÇµ±Ç°Ä£Ê½Ã»±ä£¬Ö»ÊÇÁ¬½Ó¶Ï¿ª£¬Ôò¼ÌĞø¹ã²¥£¬²¢¿ªÆô¹ıÂË,(×¢ÒâÊÇ·ñÊÇOTAÄ£Ê½)
-                // 3¡¢ÇĞ»»µ½ÁíÍâµÄÀ¶ÑÀÄ£Ê½£¬ÃüÁîÍ£Ö¹µÄÁ¬½Ó£¬ÔòĞŞ¸ÄmacµØÖ·£¬ÅĞ¶ÏÊÇ·ñÒÑ¾­°ó¶¨¹ı£¬ÊÇÔò¿ªÆô¹ã²¥£¬²¢¿ªÆô¹ıÂË£¬·ñÔò²»¿ªÆô¹ã²¥£¬µÈ´ıÅä¶ÔÃüÁî¡£
+                // 1ã€åˆ‡æ¢åˆ°å…¶ä»–æ¨¡å¼ï¼Œå‘½ä»¤åœæ­¢çš„è¿æ¥ï¼Œåˆ™åˆ¤æ–­æ¨¡å¼ï¼Œä¸å¼€å¯æ–°çš„å¹¿æ’­
+                // 2ã€è¿˜æ˜¯å½“å‰æ¨¡å¼æ²¡å˜ï¼Œåªæ˜¯è¿æ¥æ–­å¼€ï¼Œåˆ™ç»§ç»­å¹¿æ’­ï¼Œå¹¶å¼€å¯è¿‡æ»¤,(æ³¨æ„æ˜¯å¦æ˜¯OTAæ¨¡å¼)
+                // 3ã€åˆ‡æ¢åˆ°å¦å¤–çš„è“ç‰™æ¨¡å¼ï¼Œå‘½ä»¤åœæ­¢çš„è¿æ¥ï¼Œåˆ™ä¿®æ”¹macåœ°å€ï¼Œåˆ¤æ–­æ˜¯å¦å·²ç»ç»‘å®šè¿‡ï¼Œæ˜¯åˆ™å¼€å¯å¹¿æ’­ï¼Œå¹¶å¼€å¯è¿‡æ»¤ï¼Œå¦åˆ™ä¸å¼€å¯å¹¿æ’­ï¼Œç­‰å¾…é…å¯¹å‘½ä»¤ã€‚
                 if((con_work_mode == access_state.ble_idx) ||
                     ( (access_state.ble_idx>BLE_INDEX_IDEL) && (access_state.ble_idx<BLE_INDEX_MAX) && ( hidEmu_is_ble_bonded(access_state.ble_idx) ) ))
                 {
@@ -1106,8 +1106,8 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                     {
                         uint8_t initial_advertising_enable = ENABLE;
                         GAPRole_SetParameter(GAPROLE_ADVERT_ENABLED, sizeof(uint8_t), &initial_advertising_enable);
-                        // ÉÏ±¨À¶ÑÀ¶Ï¿ª
-                        // Èç¹ûµ±Ç°ÒÑ¾­ÊÇ2.4GÄ£Ê½µÄ»°£¬ËµÃ÷ÒÑ¾­·¢¹ıµÄ¶Ï¿ª£¬²»ÔÙ·¢¡£
+                        // ä¸ŠæŠ¥è“ç‰™æ–­å¼€
+                        // å¦‚æœå½“å‰å·²ç»æ˜¯2.4Gæ¨¡å¼çš„è¯ï¼Œè¯´æ˜å·²ç»å‘è¿‡çš„æ–­å¼€ï¼Œä¸å†å‘ã€‚
                         if( access_state.ble_idx != BLE_INDEX_IDEL)
                         {
                             access_tran_report(REPORT_CMD_STATE, STATE_CON_TERMINATE);
@@ -1117,8 +1117,8 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                     {
                         if( access_state.pairing_state )
                         {
-                            // ÉÏ±¨À¶ÑÀ¶Ï¿ª
-                            // Èç¹ûµ±Ç°ÒÑ¾­ÊÇ2.4GÄ£Ê½µÄ»°£¬ËµÃ÷ÒÑ¾­·¢¹ıµÄ¶Ï¿ª£¬²»ÔÙ·¢¡£
+                            // ä¸ŠæŠ¥è“ç‰™æ–­å¼€
+                            // å¦‚æœå½“å‰å·²ç»æ˜¯2.4Gæ¨¡å¼çš„è¯ï¼Œè¯´æ˜å·²ç»å‘è¿‡çš„æ–­å¼€ï¼Œä¸å†å‘ã€‚
                             if( access_state.ble_idx != BLE_INDEX_IDEL)
                             {
                                 access_tran_report(REPORT_CMD_STATE, STATE_CON_TERMINATE);
@@ -1133,8 +1133,8 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                                 if(access_state.deep_sleep_flag)
                                 {
                                     PRINT("send dis\n");
-                                    // ÉÏ±¨À¶ÑÀ¶Ï¿ª
-                                    // Èç¹ûµ±Ç°ÒÑ¾­ÊÇ2.4GÄ£Ê½µÄ»°£¬ËµÃ÷ÒÑ¾­·¢¹ıµÄ¶Ï¿ª£¬²»ÔÙ·¢¡£
+                                    // ä¸ŠæŠ¥è“ç‰™æ–­å¼€
+                                    // å¦‚æœå½“å‰å·²ç»æ˜¯2.4Gæ¨¡å¼çš„è¯ï¼Œè¯´æ˜å·²ç»å‘è¿‡çš„æ–­å¼€ï¼Œä¸å†å‘ã€‚
                                     if( access_state.ble_idx != BLE_INDEX_IDEL)
                                     {
                                         access_tran_report(REPORT_CMD_STATE, STATE_CON_TERMINATE);
@@ -1142,8 +1142,8 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                                 }
                                 else
                                 {
-                                    //Í¬Í¨µÀ³¬Ê±¶Ï¿ª£¬²»¹ã²¥£¬½øÈëË¯Ãß  ¸ÄÎª¹ã²¥5ÃëºóË¯Ãß
-                                    // »Ö¸´Ã»ÓĞ·¢³öÈ¥µÄ°ü£»
+                                    //åŒé€šé“è¶…æ—¶æ–­å¼€ï¼Œä¸å¹¿æ’­ï¼Œè¿›å…¥ç¡çœ   æ”¹ä¸ºå¹¿æ’­5ç§’åç¡çœ 
+                                    // æ¢å¤æ²¡æœ‰å‘å‡ºå»çš„åŒ…ï¼›
                                     PRINT("res_num %d\n",BLE_buf_resend_num);
                                     hidEmu_resend_BUF();
                                     hidEmu_adv_enable(ENABLE);
@@ -1159,13 +1159,13 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                             }
                             else
                             {
-                                // ÉÏ±¨À¶ÑÀ¶Ï¿ª
-                                // Èç¹ûµ±Ç°ÒÑ¾­ÊÇ2.4GÄ£Ê½µÄ»°£¬ËµÃ÷ÒÑ¾­·¢¹ıµÄ¶Ï¿ª£¬²»ÔÙ·¢¡£
+                                // ä¸ŠæŠ¥è“ç‰™æ–­å¼€
+                                // å¦‚æœå½“å‰å·²ç»æ˜¯2.4Gæ¨¡å¼çš„è¯ï¼Œè¯´æ˜å·²ç»å‘è¿‡çš„æ–­å¼€ï¼Œä¸å†å‘ã€‚
                                 if( access_state.ble_idx != BLE_INDEX_IDEL)
                                 {
                                     access_tran_report(REPORT_CMD_STATE, STATE_CON_TERMINATE);
                                 }
-                                // ½øÈëĞÂÀ¶ÑÀÄ£Ê½µÄ»ØÁ¬×´Ì¬
+                                // è¿›å…¥æ–°è“ç‰™æ¨¡å¼çš„å›è¿çŠ¶æ€
                                 access_tran_report(REPORT_CMD_STATE, STATE_RE_CONNECTING);
                                 hidEmu_adv_enable(ENABLE);
                             }
@@ -1175,28 +1175,28 @@ static void hidEmuStateCB(gapRole_States_t newState, gapRoleEvent_t *pEvent)
                 else if((access_state.ble_idx>BLE_INDEX_IDEL) && (access_state.ble_idx<BLE_INDEX_MAX))
                 {
                     con_work_mode = access_state.ble_idx;
-                    // ÉÏ±¨À¶ÑÀ¶Ï¿ª
-                    // Èç¹ûµ±Ç°ÒÑ¾­ÊÇ2.4GÄ£Ê½µÄ»°£¬ËµÃ÷ÒÑ¾­·¢¹ıµÄ¶Ï¿ª£¬²»ÔÙ·¢¡£
+                    // ä¸ŠæŠ¥è“ç‰™æ–­å¼€
+                    // å¦‚æœå½“å‰å·²ç»æ˜¯2.4Gæ¨¡å¼çš„è¯ï¼Œè¯´æ˜å·²ç»å‘è¿‡çš„æ–­å¼€ï¼Œä¸å†å‘ã€‚
                     if( access_state.ble_idx != BLE_INDEX_IDEL)
                     {
                         access_tran_report(REPORT_CMD_STATE, STATE_CON_TERMINATE);
                     }
-                    // Ã»°ó¶¨¹ı£¬ÎŞ·¨»ØÁ¬
+                    // æ²¡ç»‘å®šè¿‡ï¼Œæ— æ³•å›è¿
                     access_tran_report(REPORT_CMD_STATE, STATE_RE_CONNECT_FAIL);
                 }
-                else //»¹ÓĞ¿ÉÄÜÊÇIDELÄ£Ê½
+                else //è¿˜æœ‰å¯èƒ½æ˜¯IDELæ¨¡å¼
                 {
                     con_work_mode = access_state.ble_idx;
-                    // ÉÏ±¨À¶ÑÀ¶Ï¿ª
-                    // Èç¹ûµ±Ç°ÒÑ¾­ÊÇ2.4GÄ£Ê½µÄ»°£¬ËµÃ÷ÒÑ¾­·¢¹ıµÄ¶Ï¿ª£¬²»ÔÙ·¢¡£
+                    // ä¸ŠæŠ¥è“ç‰™æ–­å¼€
+                    // å¦‚æœå½“å‰å·²ç»æ˜¯2.4Gæ¨¡å¼çš„è¯ï¼Œè¯´æ˜å·²ç»å‘è¿‡çš„æ–­å¼€ï¼Œä¸å†å‘ã€‚
                     if( access_state.ble_idx != BLE_INDEX_IDEL)
                     {
                         access_tran_report(REPORT_CMD_STATE, STATE_CON_TERMINATE);
                     }
                 }
-//                // ¼ÇÏÂµ±Ç°Ä£Ê½  Éî¶ÈË¯ÃßºóÄ£Ê½¸ÄÎªidel£¬ËùÒÔÕâÀï²»ÄÜÍ¬²½Ä£Ê½
+//                // è®°ä¸‹å½“å‰æ¨¡å¼  æ·±åº¦ç¡çœ åæ¨¡å¼æ”¹ä¸ºidelï¼Œæ‰€ä»¥è¿™é‡Œä¸èƒ½åŒæ­¥æ¨¡å¼
 //                con_work_mode = access_state.ble_idx;
-                // 20230831ĞŞ¸Ä À¶ÑÀÄ£Ê½´®¿ÚÃ»ÓĞÉÏ±¨À¶ÑÀÁ¬½Ó¶Ï¿ªÖ¸Áî
+                // 20230831ä¿®æ”¹ è“ç‰™æ¨¡å¼ä¸²å£æ²¡æœ‰ä¸ŠæŠ¥è“ç‰™è¿æ¥æ–­å¼€æŒ‡ä»¤
                 hidDevConnSecure = FALSE;
                 PRINT("Disconnected.. Reason:%x\n", pEvent->linkTerminate.reason);
             }
@@ -1244,7 +1244,7 @@ static uint8_t hidEmuRcvReport(uint8_t len, uint8_t *pData)
     // verify data length
     if(len == HID_LED_OUT_RPT_LEN)
     {
-        // ÉÏ±¨¼üÅÌ×´Ì¬µÆ
+        // ä¸ŠæŠ¥é”®ç›˜çŠ¶æ€ç¯
         if(hidEmu_receive_cb)
         {
             uint8_t buf[2];

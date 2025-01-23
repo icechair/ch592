@@ -38,7 +38,7 @@ uint8_t HAL_SaveDeviceInfo(void)
 {
     uint32_t StartAddr;
 
-    if (DeviceInfo.InfoNum == DEVICEINFO_MAX) //flash“—æ≠¥Ê¥¢¬˙
+    if (DeviceInfo.InfoNum == DEVICEINFO_MAX) //flashÂ∑≤ÁªèÂ≠òÂÇ®Êª°
     {
         if (EEPROM_ERASE(DEVICEINFO_ADDR, DEVICEINFO_FLASH_SIZE) != SUCCESS)
         {
@@ -51,7 +51,7 @@ uint8_t HAL_SaveDeviceInfo(void)
     StartAddr = DEVICEINFO_ADDR + DEVICEINFO_LEN * DeviceInfo.InfoNum;
     ++DeviceInfo.InfoNum; //Add in advance and need to save it in flash
     DeviceInfo.Checksum = HAL_FlashChecksumCalculate((uint8_t*)&DeviceInfo, DEVICEINFO_LEN-1);
-    if (EEPROM_WRITE(StartAddr, &DeviceInfo, DEVICEINFO_LEN) != SUCCESS) //–¥flash
+    if (EEPROM_WRITE(StartAddr, &DeviceInfo, DEVICEINFO_LEN) != SUCCESS) //ÂÜôflash
     {
         --DeviceInfo.InfoNum;
         LOG_INFO("ERROR2\n");

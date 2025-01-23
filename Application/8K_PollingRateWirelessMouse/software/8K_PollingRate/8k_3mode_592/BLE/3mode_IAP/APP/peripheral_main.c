@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.1
  * Date               : 2019/11/05
- * Description        : ÅĞ¶Ï±êÖ¾ÒÔ¼°°áÔË´úÂëµ½APP´úÂëÇø
+ * Description        : åˆ¤æ–­æ ‡å¿—ä»¥åŠæ¬è¿ä»£ç åˆ°APPä»£ç åŒº
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * Attention: This software (modified or not) and binary are used for 
@@ -11,15 +11,15 @@
  *******************************************************************************/
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include "CH59x_common.h"
 #include "peripheral.h"
 #include "OTA.h"
 
-/* ¼ÇÂ¼µ±Ç°µÄImage */
+/* è®°å½•å½“å‰çš„Image */
 unsigned char CurrImageFlag = 0xff;
 
-/* flashµÄÊı¾İÁÙÊ±´æ´¢ */
+/* flashçš„æ•°æ®ä¸´æ—¶å­˜å‚¨ */
 __attribute__((aligned(8))) uint8_t block_buf[16];
 
 #define IAP_SAFE_FLAG_2_4G       0x30de5820
@@ -36,9 +36,9 @@ __attribute__((aligned(8))) uint8_t block_buf[16];
 /*********************************************************************
  * @fn      SwitchImageFlag
  *
- * @brief   ÇĞ»»dataflashÀïµÄImageFlag
+ * @brief   åˆ‡æ¢dataflashé‡Œçš„ImageFlag
  *
- * @param   new_flag    - ÇĞ»»µÄImageFlag
+ * @param   new_flag    - åˆ‡æ¢çš„ImageFlag
  *
  * @return  none
  */
@@ -47,23 +47,23 @@ void SwitchImageFlag(uint8_t new_flag)
     uint16_t i;
     uint32_t ver_flag;
 
-    /* ¶ÁÈ¡µÚÒ»¿é */
+    /* è¯»å–ç¬¬ä¸€å— */
     EEPROM_READ(OTA_DATAFLASH_ADD, (uint32_t *)&block_buf[0], 4);
 
-    /* ²Á³ıµÚÒ»¿é */
+    /* æ“¦é™¤ç¬¬ä¸€å— */
     EEPROM_ERASE(OTA_DATAFLASH_ADD, EEPROM_PAGE_SIZE);
 
-    /* ¸üĞÂImageĞÅÏ¢ */
+    /* æ›´æ–°Imageä¿¡æ¯ */
     block_buf[0] = new_flag;
 
-    /* ±à³ÌDataFlash */
+    /* ç¼–ç¨‹DataFlash */
     EEPROM_WRITE(OTA_DATAFLASH_ADD, (uint32_t *)&block_buf[0], 4);
 }
 
 /*********************************************************************
  * @fn      jump_APP
  *
- * @brief   ÇĞ»»APP³ÌĞò
+ * @brief   åˆ‡æ¢APPç¨‹åº
  *
  * @return  none
  */
@@ -88,7 +88,7 @@ void jump_APP(void)
                 FLASH_ROM_WRITE(IMAGE_A_2_4G_START_ADD + (i * 1024), flash_Data, 1024);
             }
             SwitchImageFlag(IMAGE_A_FLAG);
-            // Ïú»Ù±¸·İ´úÂë
+            // é”€æ¯å¤‡ä»½ä»£ç 
             FLASH_ROM_ERASE(IMAGE_B_START_ADD, IMAGE_A_2_4G_SIZE);
         }
         else if(flash_flag == IAP_SAFE_FLAG_BLE)
@@ -100,7 +100,7 @@ void jump_APP(void)
                 FLASH_ROM_WRITE(IMAGE_A_BLE_START_ADD + (i * 1024), flash_Data, 1024);
             }
             SwitchImageFlag(IMAGE_A_FLAG);
-            // Ïú»Ù±¸·İ´úÂë
+            // é”€æ¯å¤‡ä»½ä»£ç 
             FLASH_ROM_ERASE(IMAGE_B_START_ADD, IMAGE_A_2_4G_SIZE);
         }
         else {
@@ -129,7 +129,7 @@ void jump_APP(void)
 /*********************************************************************
  * @fn      ReadImageFlag
  *
- * @brief   ¶ÁÈ¡µ±Ç°µÄ³ÌĞòµÄImage±êÖ¾£¬DataFlashÈç¹ûÎª¿Õ£¬¾ÍÄ¬ÈÏÊÇImageA
+ * @brief   è¯»å–å½“å‰çš„ç¨‹åºçš„Imageæ ‡å¿—ï¼ŒDataFlashå¦‚æœä¸ºç©ºï¼Œå°±é»˜è®¤æ˜¯ImageA
  *
  * @return  none
  */
@@ -140,7 +140,7 @@ void ReadImageFlag(void)
     EEPROM_READ(OTA_DATAFLASH_ADD, &p_image_flash, 4);
     CurrImageFlag = p_image_flash.ImageFlag;
 
-    /* ³ÌĞòµÚÒ»´ÎÖ´ĞĞ£¬»òÕßÃ»ÓĞ¸üĞÂ¹ı£¬ÒÔºó¸üĞÂºóÔÚ²Á³ıDataFlash */
+    /* ç¨‹åºç¬¬ä¸€æ¬¡æ‰§è¡Œï¼Œæˆ–è€…æ²¡æœ‰æ›´æ–°è¿‡ï¼Œä»¥åæ›´æ–°ååœ¨æ“¦é™¤DataFlash */
     if((CurrImageFlag != IMAGE_A_FLAG) && (CurrImageFlag != IMAGE_B_FLAG) && (CurrImageFlag != IMAGE_IAP_FLAG))
     {
         CurrImageFlag = IMAGE_A_FLAG;
@@ -152,7 +152,7 @@ void ReadImageFlag(void)
 /*********************************************************************
  * @fn      main
  *
- * @brief   Ö÷º¯Êı
+ * @brief   ä¸»å‡½æ•°
  *
  * @return  none
  */

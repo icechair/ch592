@@ -10,7 +10,7 @@
 
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include <RF.h>
 #include "CH59x_common.h"
 #include "wchrf.h"
@@ -58,9 +58,9 @@ void BB_IRQHandler( void )
 /*******************************************************************************
  * @fn      RTC_SetTignTime
  *
- * @brief   ÅäÖÃRTC´¥·¢Ê±¼ä
+ * @brief   é…ç½®RTCè§¦å‘æ—¶é—´
  *
- * @param   time    - ´¥·¢Ê±¼ä.
+ * @param   time    - è§¦å‘æ—¶é—´.
  *
  * @return  None.
  */
@@ -74,7 +74,7 @@ void RTC_SetTignTime(uint32_t time)
 /*******************************************************************************
  * @fn          RTC_IRQHandler
  *
- * @brief       RTCÖĞ¶Ï´¦Àí
+ * @brief       RTCä¸­æ–­å¤„ç†
  *
  * input parameters
  *
@@ -109,7 +109,7 @@ void RTC_IRQHandler( void )
 /*******************************************************************************
  * @fn      Lib_Calibration_LSI
  *
- * @brief   ÄÚ²¿32kĞ£×¼
+ * @brief   å†…éƒ¨32kæ ¡å‡†
  *
  * @param   None.
  *
@@ -162,7 +162,7 @@ static void SYS_SetTignOffest( int32_t val )
 /*********************************************************************
  * @fn      TMR0_IRQHandler
  *
- * @brief   TMR0ÖĞ¶Ïº¯Êı
+ * @brief   TMR0ä¸­æ–­å‡½æ•°
  *
  * @return  none
  */
@@ -172,7 +172,7 @@ void TMR3_IRQHandler(void) // TMR3
 {
     uint32_t trig_time;
 
-    TMR3_ClearITFlag(TMR0_3_IT_CYC_END); // Çå³ıÖĞ¶Ï±êÖ¾
+    TMR3_ClearITFlag(TMR0_3_IT_CYC_END); // æ¸…é™¤ä¸­æ–­æ ‡å¿—
     if( !TMOS_TimerIRQHandler( &trig_time )  )
     {
         if( trig_time ){
@@ -189,7 +189,7 @@ void TMR3_IRQHandler(void) // TMR3
 /*******************************************************************************
  * @fn          HAL_Time0Init
  *
- * @brief       ÏµÍ³¶¨Ê±Æ÷³õÊ¼»¯
+ * @brief       ç³»ç»Ÿå®šæ—¶å™¨åˆå§‹åŒ–
  *
  * input parameters
  *
@@ -221,27 +221,27 @@ void HAL_TimeInit( void )
   SysTick_Config(0xFFFFFFFF);
   PFIC_DisableIRQ(SysTick_IRQn);
 
-  // tmosÊ±¼äÏà¹ØÅäÖÃ
+  // tmosæ—¶é—´ç›¸å…³é…ç½®
   conf.ClockAccuracy = 500;
   conf.ClockFrequency = CAB_LSIFQ;
   conf.ClockMaxCount = RTC_MAX_COUNT;
   conf.getClockValue = SYS_GetClockValue;
 
-  // rfÍ¨ĞÅÊ±¼äÏà¹ØÅäÖÃ
+  // rfé€šä¿¡æ—¶é—´ç›¸å…³é…ç½®
   conf.Clock1Frequency = GetSysClock( )/1000;  //kHz
   conf.getClock1Value = SYS_GetClock1Value;
   conf.SetPendingIRQ = SYS_SetPendingIRQ;
   conf.SetTign = SYS_SetTignOffest;
   TMOS_TimerInit( &conf );
 
-  TMR3_ITCfg(ENABLE, TMR0_3_IT_CYC_END); // ¿ªÆôÖĞ¶Ï
+  TMR3_ITCfg(ENABLE, TMR0_3_IT_CYC_END); // å¼€å¯ä¸­æ–­
   PFIC_EnableIRQ(TMR3_IRQn);
 }
 
 /*******************************************************************************
  * @fn      rfRoleBoundProcess
  *
- * @brief   RFÊÕ·¢DMA³õÊ¼»¯
+ * @brief   RFæ”¶å‘DMAåˆå§‹åŒ–
  *
  * @param   None.
  *
@@ -275,7 +275,7 @@ void rfDMADescInit( void )
 /*******************************************************************************
  * @fn      RF_LibInit
  *
- * @brief   rf ¿â³õÊ¼»¯
+ * @brief   rf åº“åˆå§‹åŒ–
  *
  * @param   None.
  *

@@ -3,8 +3,8 @@
  * Author             : WCH
  * Version            : V1.0
  * Date               : 2022/03/15
- * Description        : rfÊÕ·¢²âÊÔÀı³Ì£¬µ¥Ïò·¢ËÍ
- *                      PB15µÍµçÆ½Îª·¢ËÍÄ£Ê½£¬Ä¬ÈÏÎª½ÓÊÕÄ£Ê½
+ * Description        : rfæ”¶å‘æµ‹è¯•ä¾‹ç¨‹ï¼Œå•å‘å‘é€
+ *                      PB15ä½ç”µå¹³ä¸ºå‘é€æ¨¡å¼ï¼Œé»˜è®¤ä¸ºæ¥æ”¶æ¨¡å¼
  *
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * SPDX-License-Identifier: Apache-2.0
@@ -12,7 +12,7 @@
 
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include "ch9160.h"
 #include <rf.h>
 #include "CH59x_common.h"
@@ -57,7 +57,7 @@ void process_main( void )
 
 /*******************************************************************************
 * Function Name  : main
-* Description    : Ö÷º¯Êı
+* Description    : ä¸»å‡½æ•°
 * Input          : None
 * Output         : None
 * Return         : None
