@@ -6,12 +6,12 @@
  * Description        : reliable unicast file transfer，可靠单播文件传输例子
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
- * Attention: This software (modified or not) and binary are used for 
+ * Attention: This software (modified or not) and binary are used for
  * microcontroller manufactured by Nanjing Qinheng Microelectronics.
  *******************************************************************************/
 #include "lwns_rucft_example.h"
 
-//每个文件单独debug打印的开关，置0可以禁止本文件内部打印
+//Each file has a separate debug print switch, set to 0 to disable internal printing in this file
 #define DEBUG_PRINT_IN_THIS_FILE    1
 #if DEBUG_PRINT_IN_THIS_FILE
   #define PRINTF(...)    PRINT(__VA_ARGS__)
@@ -51,14 +51,14 @@ uint16_t lwns_rucft_ProcessEvent(uint8_t task_id, uint16_t events);
 /*********************************************************************
  * @fn      write_file
  *
- * @brief   lwns rucft接收回调函数，作为写入文件回调函数
+ * @brief   lwns rucft receive callback function, used as a write file callback function
  *
- * @param   ptr         -   本次接收到的数据所属的netflood控制结构体指针.
- * @param   sender      -   本次接收到的数据的发送者地址指针.
- * @param   offset      -   本次接收到的数据的偏移量，也是本次文件传输接收已经收到的数据量.
- * @param   flag        -   本次接收到数据的标志，LWNS_RUCFT_FLAG_NONE/LWNS_RUCFT_FLAG_NEWFILE/LWNS_RUCFT_FLAG_END.
- * @param   data        -   本次接收到的数据的头指针.
- * @param   datalen     -   本次接收到的数据的长度.
+ * @param   ptr         -   Pointer to the netflood control structure to which the received data belongs.
+ * @param   sender      -   Pointer to the address of the sender of the received data.
+ * @param   offset      -   Offset of the received data, which is also the amount of data received in this file transfer.
+ * @param   flag        -   Flag of the received data, LWNS_RUCFT_FLAG_NONE/LWNS_RUCFT_FLAG_NEWFILE/LWNS_RUCFT_FLAG_END.
+ * @param   data        -   Pointer to the head of the received data.
+ * @param   datalen     -   Length of the received data.
  *
  * @return  None.
  */

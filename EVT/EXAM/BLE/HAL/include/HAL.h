@@ -6,7 +6,7 @@
  * Description        :
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
- * Attention: This software (modified or not) and binary are used for 
+ * Attention: This software (modified or not) and binary are used for
  * microcontroller manufactured by Nanjing Qinheng Microelectronics.
  *******************************************************************************/
 
@@ -59,9 +59,10 @@ extern tmosEvents HAL_ProcessEvent(tmosTaskID task_id, tmosEvents events);
 extern void CH59x_BLEInit(void);
 
 /**
- * @brief   获取内部温感采样值，如果使用了ADC中断采样，需在此函数中暂时屏蔽中断.
+ * @brief   Get the internal temperature sensor sampling value. If ADC interrupt sampling is used,
+ *          the interrupt should be temporarily disabled in this function.
  *
- * @return  内部温感采样值.
+ * @return  Internal temperature sensor sampling value.
  */
 extern uint16_t HAL_GetInterTempValue(void);
 

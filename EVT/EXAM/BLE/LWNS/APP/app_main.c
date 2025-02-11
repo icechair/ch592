@@ -9,7 +9,7 @@
 
 
 /******************************************************************************/
-/* 头文件包含 */
+/* Header file inclusion */
 #include "CONFIG.h"
 #include "CH59x_common.h"
 #include "HAL.h"
@@ -27,7 +27,7 @@
 #include "lwns_multinetflood_example.h"
 #include "lwns_mesh_example.h"
 
-//每个文件单独debug打印的开关，置0可以禁止本文件内部打印
+// Switch for individual file debug printing, set to 0 to disable printing within this file
 #define DEBUG_PRINT_IN_THIS_FILE 1
 #if DEBUG_PRINT_IN_THIS_FILE
 #define PRINTF(...) PRINT(__VA_ARGS__)
@@ -80,7 +80,7 @@ int main( void )
   GPIOA_SetBits( bTXD1 );
   GPIOA_ModeCfg( bTXD1, GPIO_ModeOut_PP_5mA );
   UART1_DefInit( );
-#endif  
+#endif
   PRINTF("start.\n");
   {
     PRINTF("%s\n",VER_LIB);

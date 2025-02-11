@@ -6,7 +6,7 @@
  * Description        : 配置说明及默认值，建议在工程配置里的预处理中修改当前值
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
- * Attention: This software (modified or not) and binary are used for 
+ * Attention: This software (modified or not) and binary are used for
  * microcontroller manufactured by Nanjing Qinheng Microelectronics.
  *******************************************************************************/
 
@@ -43,11 +43,11 @@
                                                                                                                                                                                                   空闲模式    - 5
  【TEMPERATION】
  TEM_SAMPLE                                 - 是否打开根据温度变化校准的功能，单次校准耗时小于10ms( 默认:TRUE )
- 
+
  【CALIBRATION】
  BLE_CALIBRATION_ENABLE                     - 是否打开定时校准的功能，单次校准耗时小于10ms( 默认:TRUE )
  BLE_CALIBRATION_PERIOD                     - 定时校准的周期，单位ms( 默认:120000 )
- 
+
  【SNV】
  BLE_SNV                                    - 是否开启SNV功能，用于储存绑定信息( 默认:TRUE )
  BLE_SNV_ADDR                               - SNV信息保存地址，使用data flash最后512字节( 默认:0x77E00 )
@@ -65,7 +65,7 @@
  BLE_BUFF_NUM                               - 控制器缓存的包数量( 默认:5 )
  BLE_TX_NUM_EVENT                           - 单个连接事件最多可以发多少个数据包( 默认:1 )
  BLE_TX_POWER                               - 发射功率( 默认:LL_TX_POWEER_0_DBM (0dBm) )
- 
+
  【MULTICONN】
  PERIPHERAL_MAX_CONNECTION                  - 最多可同时做多少从机角色( 默认:1 )
  CENTRAL_MAX_CONNECTION                     - 最多可同时做多少主机角色( 默认:3 )
@@ -84,10 +84,10 @@
 #ifndef HAL_SLEEP
 #define HAL_SLEEP                           FALSE
 #endif
-#ifndef SLEEP_RTC_MIN_TIME                   
+#ifndef SLEEP_RTC_MIN_TIME
 #define SLEEP_RTC_MIN_TIME                  US_TO_RTC(1000)
 #endif
-#ifndef SLEEP_RTC_MAX_TIME                   
+#ifndef SLEEP_RTC_MAX_TIME
 #define SLEEP_RTC_MAX_TIME                  (RTC_MAX_COUNT - 1000 * 1000 * 30)
 #endif
 #ifndef WAKE_UP_RTC_MAX_TIME
@@ -121,10 +121,10 @@
 #define BLE_SNV_NUM                         1
 #endif
 #ifndef CLK_OSC32K
-#define CLK_OSC32K                          1   // 该项请勿在此修改，必须在工程配置里的预处理中修改，如包含主机角色必须使用外部32K
+#define CLK_OSC32K                          1   // Do not modify this item here, it must be modified in the project configuration's preprocessing. If the host role is included, an external 32K must be used.
 #endif
 #ifndef BLE_MEMHEAP_SIZE
-#define BLE_MEMHEAP_SIZE                    (1024*6)
+#define BLE_MEMHEAP_SIZE                    (1024*6*2)
 #endif
 #ifndef BLE_BUFF_MAX_LEN
 #define BLE_BUFF_MAX_LEN                    27

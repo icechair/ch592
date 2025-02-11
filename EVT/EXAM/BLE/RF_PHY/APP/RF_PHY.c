@@ -6,7 +6,7 @@
  * Description        :
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
- * Attention: This software (modified or not) and binary are used for 
+ * Attention: This software (modified or not) and binary are used for
  * microcontroller manufactured by Nanjing Qinheng Microelectronics.
  *******************************************************************************/
 
@@ -30,7 +30,7 @@ volatile uint8_t rx_end_flag=0;
 /*********************************************************************
  * @fn      RF_Wait_Tx_End
  *
- * @brief   手动模式等待发送完成，自动模式等待发送-接收完成，必须在RAM中等待，等待时可以执行用户代码，但需要注意执行的代码必须运行在RAM中，否则影响发送
+ * @brief   In manual mode, wait for transmission to complete; in automatic mode, wait for transmission-reception to complete. Must wait in RAM. User code can be executed during the wait, but note that the executed code must run in RAM; otherwise, it will affect transmission.
  *
  * @return  none
  */
@@ -147,7 +147,7 @@ void RF_2G4StatusCallBack(uint8_t sta, uint8_t crc, uint8_t *rxBuf)
 #endif
                 PRINT("rx recv, rssi: %d\n", (int8_t)rxBuf[0]);
                 PRINT("len:%d-", rxBuf[1]);
-                
+
                 for (i = 0; i < rxBuf[1]; i++) {
                     PRINT("%x ", rxBuf[i + 2]);
                 }
